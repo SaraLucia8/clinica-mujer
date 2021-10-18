@@ -1,0 +1,114 @@
+*{
+    padding: 0;
+    margin: 0;    
+    font-family: 'Ropa Sans', sans-serif;
+}
+
+body{
+    background-image: url(/static/images/fondo.jpg);
+    background-size: cover;
+    
+}
+.bienvenida {
+    text-align: center;
+    font-size: 24px;;
+}
+.contenedor__registro{
+    display: block;
+
+    width: 70%;
+    height: 85%;
+    border: 1px solid black;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgba(255,255,255,0.9);    
+    border-radius: 25px;;
+    box-shadow: 0px 0px 20px black;
+}
+.contenedor__banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.contenedor__banner h2 {
+    font-size: 34px;
+    margin-left: -10px;
+    color: #F72B50;
+}
+.formulario__registro {
+    margin: 0 30px;
+    display:flex;
+    flex-wrap: wrap;
+
+}
+.campos-30 {
+    width: 30%;
+    margin-left: 1.5rem;
+}
+
+.campos{
+    width: 100%;
+    height: 2.5rem;
+    margin-top: 2px;
+    background: #F72B50;
+    opacity: .4;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+}
+.campo-eps {
+    width: 100%;
+    height: 2.5rem;
+    margin-top: 2px;
+    background: #F72B50;
+    opacity: .4;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+}
+.opciones{
+    border:1px solid blue;
+    
+}
+
+.formulario__registro h3 {
+    font-size: 20px;
+    text-align: center;
+    margin-top: 1rem;
+}
+.boton__registro{
+    display:block;
+    width: 70%;
+    height: 3rem;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    background: #F72B50;
+    opacity: .7;
+    color:white;
+    font-size:20px;
+    border-radius: 20px;
+    border: none;
+}
+.boton__registro:hover{
+    background: #F72B50;
+    font-weight: bold;
+    opacity: 1;
+    cursor: pointer;
+}
+.politicas {
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+}

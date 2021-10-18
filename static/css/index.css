@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Ropa+Sans&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.header {
+    width: 100%;
+    padding: 0.7rem 0rem;
+    height: 3rem;
+    display: flex;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    vertical-align: middle;
+    height: 3rem;
+    padding-left: 3rem;
+}
+
+.menu {
+    padding-right: 2rem;
+    display: flex;
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 1.3rem;
+    color: white;
+    justify-content: space-between;
+    vertical-align: middle;
+}
+
+.menuitems {
+    margin: 1rem 2rem;
+}
+
+.menuitems span{
+    color: #F72B50;
+    padding: 0.5rem;
+}
+
+.menuitems span:hover{
+    color: #450B5A;
+    border-bottom: 0.17rem solid #450B5A;
+    padding: 0.5rem;
+}
+
+.menuitems2 {
+    margin: 1rem 2rem;
+}
+
+.lrh {
+    background-color: #F72B50;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 1.3rem;
+}
+
+.lrh:hover {
+    background-color: white;
+    color: #F72B50;
+    padding: 0.5rem;
+    border: 2px solid #F72B50;
+    border-radius: 1.3rem;
+}
+
+.background img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.main { 
+    padding: 2rem 5rem 4rem 5rem;
+}
+
+.titulo {
+    text-align: center;
+    color: #F72B50;
+    font-size: 3rem;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 2rem;
+}
+
+p {
+    font-size: 1.2rem;
+    font-family: 'Average Sans', sans-serif;
+    text-align: justify;
+}
+
+h3 {
+    font-size: 2rem;
+    font-family: 'Ropa Sans', sans-serif;
+    text-align: center;
+    color: #450B5A;
+    margin-bottom: 2rem;
+}
+
+.contenedor_misvis {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.misvis {
+    padding: 2rem;
+    border: 0.2rem solid #450B5A;
+    width: 40%;
+}
+
+.misvis h2 {
+    font-size: 2rem;
+    font-family: 'Ropa Sans', sans-serif;
+    text-align: center;
+    color: #F72B50;
+    margin-bottom: 1rem;
+}
+
+footer {
+    display: flex;
+    padding: 2rem;
+    font-family: 'Average Sans', sans-serif;
+    background-color: #450B5A;
+    color: white;
+    justify-content: space-around;
+}
+
+.logo2 {
+    height: 6rem;
+    margin: 3rem;
+}
+
+.titulo2 {
+    text-align: center;
+    color: #F72B50;
+    font-size: 3rem;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 2rem;
+}
+
+strong {
+    padding: 2rem 0rem;
+    color: #450B5A;
+    font-size: 1.3rem;
+}

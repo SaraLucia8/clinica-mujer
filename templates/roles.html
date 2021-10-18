@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles y Permisos</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/images.png')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/roles.css')}}">
+</head>
+
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/paciente" class="menulink"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menulink"><span>Citas pendientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/roles" class="menuselect"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <a href="/medico/new" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}" class="profile" alt=""><span>Nuevo rol</span></a>
+            <div>
+                <div class="perfil">
+                    <div>
+                        <span class="nameuser">Ana Ortiz</span><br>
+                        <span class="roluser">Admin</span>
+                    </div>
+                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                    <img src="{{ url_for('static', filename='images/triangulo.png')}}" class="triangulo" alt="">
+                </div> 
+            </div>
+        </div>
+        <div class="cuerpo">
+            <!--En este espacio va la informacion especifica de cada pagina -->
+            <div class="campos-50">
+                <select name="role" id="role" class="campo-role">
+                    <option value="roles" selected="selected disabled" >Seleccione el Rol</option>
+                    <option value="Medico"   class="opciones">Médico</option>
+                    <option value="Paciente" class="opciones">Paciente</option>
+                    <option value="Admin"    class="opciones">Administrador</option>
+                </select>
+            </div>
+            <div class="contenedor_table">
+                <section class="u-section-3">
+                    <!--<div class="u-expanded-width u-table ">-->
+                    <div class="u-table">
+                        <table>
+                            <thead class="u-align-center  u-table-header-1">
+                                <tr style="height: 10px;">
+                                    <th class="title-tabla">Permisos</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <table class="nameactiv u-table-entity-1">
+                            <thead class="u-table-header-2">
+                                <tr style="height: 21px;width:30%">
+                                <th class="u-border-1 u-border-palette-5-light-1 u-red-10  ">Actividad</th>
+                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Crear</th>
+                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Consultar</th>
+                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Editar</th>
+                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Eliminar</th>
+                                </tr>
+                            </thead>
+      
+                            <tbody class="u-align-center u-table-body">
+
+                            <tr style="height: 30px; width:30%">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Usuario Medico</td>
+                                
+                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+
+                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+
+                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="height: 30px;">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Usuario Paciente</td>
+                                
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                            </tr>
+        
+                            <tr style="height: 30px; width:30%">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Citas</td>
+        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                    
+                           <tr style="height: 30px;">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Calificaciones</td>
+                                
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="height: 30px;">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Comentarios</td>
+                                
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                                
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                        
+                                <td class="u-border-1 u-border-grey-25"> 
+                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
+                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
+                                        <label class="s18 text-normal"></label>
+                                    </div>
+                                </td>
+                            </tr>
+                    
+                            <tr style="height: 30px;">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                            </tr>          
+          
+                            <tr style="height: 30px;">
+                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                                <td class="u-border-1 u-border-grey-25"> </td>
+                            </tr>          
+                        </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Ropa+Sans&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.background {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.btned {
+    width: 2rem;
+}
+
+body {
+    display: flex;
+}
+
+.calendarwatch {
+    height: 2rem;
+}
+
+.contenedordbtn {
+    display: flex;
+    justify-content: space-between;
+    width: 5rem;
+    float: right;
+}
+
+.contenedortbtn {
+    display: flex;
+    justify-content: space-between;
+    width: 10rem;
+    margin: auto;
+    padding-bottom: 1rem;
+
+}
+
+.contenedorperfil {
+    width: 45%;
+}
+
+.contenedorcitas {
+    height: 100%;
+    width: 45%;
+    background-color: #FEEAED;
+    border-radius: 1.6875rem;
+    padding: 2rem;
+}
+
+.cuerpo {
+    display: flex;
+    margin-top: 3rem;
+    border: 0.1rem solid #450B5A;
+    border-radius: 1.6875rem;
+    padding: 2.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.diahora {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.diahora span {
+    margin-left: 0.5rem;
+}
+
+.flecha{
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.perfil {
+    display: inline-flex;
+    align-items: center;
+    text-align: right;
+    margin-left: 2rem;
+    width: 10rem;
+    justify-content: flex-end;
+}
+
+.header {
+    margin:0;
+    display: inline-block;
+    width: 18rem;
+    height: 100vh;
+    justify-content: center;
+}
+
+.infocita {
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.infotitle {
+    font-size: 1.5rem;
+    font-family: 'Ropa Sans', sans-serif;
+    color: #F72B50;
+}
+
+.logo{
+    display: block;
+    height: 4rem;
+    margin: auto;
+    padding: 1rem;
+}
+
+.main {
+    width: calc(100% - 18rem);
+    padding: 1.8rem 4rem;
+    border-left: 0.1rem solid #F72B50;
+}
+
+.menu {
+    font-family: 'Average Sans', sans-serif;
+    list-style: none;
+    color: black;
+}
+
+.menulink{
+    display: inline-flex;
+    font-size: 1.2rem;
+    width: 14rem;
+    height: 1.5rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.menulink:hover{
+    background-color: #F72B50;
+    color: white;
+}
+
+.menuselect{
+    display: inline-flex;
+    font-size: 1.2rem;
+    width: 14rem;
+    height: 1.5rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: black;
+    background-color: #F72B50;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.nameuser{
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 1.2rem;
+    color: #F72B50;
+}
+
+.newuser {
+    display: flex;
+    width: 10rem;
+    background: #F72B50;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Average Sans', sans-serif;
+    border-radius: 1.6875rem;
+    align-items: center;
+    text-decoration: none;
+}
+
+.roluser{
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 0.9rem;
+}
+
+p {
+    font-size: 1.1rem;
+    font-family: 'Average Sans', sans-serif;
+    text-align: justify;
+}
+
+.pacienteperfil {
+    display: flex;
+    flex-direction: column;
+}
+
+.perfilcitas {
+    display: flex;
+}
+
+.profile {
+    height: 2.5rem;
+    margin-left: 0.5rem;
+}
+
+.search {
+    width: 16.75rem;
+    padding: 1rem;
+    background: #FEEAED;
+    border: none;
+    font-size: 0.8rem;
+    color: black;
+    border-radius: 1.6875rem;
+    outline: none;
+}
+
+.searchuser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.titulo {
+    font-size: 2rem;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 1rem;
+}
+
+
+.triangulo {
+    height: 0.7rem;
+    margin-left: 0.33rem;
+    transform: rotate(90deg);
+}
+
+.username {
+    margin-left: 0.5rem;
+    font-size: 2rem;
+    font-family: 'Ropa Sans', sans-serif;
+}
+
+.userinfo {
+    margin-top: 2rem;
+}
+
+.userinfo span{
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+.userinfo br{
+    height: 2rem;
+}
+
+.userper {
+    height: 4.5rem;
+}
+
+.userperf {
+    display: flex;
+    color: #F72B50;
+    align-items: center;
+}
+
+.userhistoria {
+    margin-top: 2rem;
+}

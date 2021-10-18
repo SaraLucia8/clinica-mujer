@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacion del medico</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/form-cita.css')}}">
+
+</head>
+
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a
+                        href="/medico"
+                        class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a>
+                </li>
+                <li class="menuitems"><a href="/paciente" class="menulink"><span>Pacientes</span><img
+                            src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menulink"><span>Citas
+                            pendientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/roles" class="menulink"><span>Roles y
+                            permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <div class="boton__nuevopaciente">
+                <a href="/listado-citas" class="btn btn-success"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}" class="icon2" alt=""></a>
+                <input class="nuevopaciente" type="submit" value="Volver">
+            </div>
+            <input type="search" class="search" placeholder="Buscar Citas">
+            <div class="perfil">
+                <div>
+                    <span class="nameuser">Ana Ortiz</span><br>
+                    <span class="roluser">Paciente</span>
+                </div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}"  class="profile" alt="">
+                <img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="triangulo" alt="">
+            </div>
+        </div>
+        <!--En este espacio va la informacion especifica de cada pagina -->
+        <div class="cuerpo">
+            <div class="contenedor__registro">
+                <h1>Crear Cita</h1>
+
+                <div class="lista_container">
+                    <form class="formulario__cita" name="formulario" method="post">
+                            <div class ="left">
+                                    <h1>Fecha de la cita</h1>
+                                    <input class="campos" type="date" name="nacimiento" required>
+                            </div>
+                            <div class ="left">
+                                <h1>Medicos</h1>
+                                <select name="medicos" id="medicos" class="campo-med">
+                                    <option selected="selected disabled" value="epss">Selecciona tu médico</option>
+                                    <option value="sura" class="opciones">Dr House</option>
+                                    <option value="saludcoop" class="opciones">Dr shawn Morphy</option>
+                                    <option value="coomeva" class="opciones">Dr Malito</option>
+                                </select>
+                            </div>
+                            <div class ="left">
+                                <h1>Nombre paciente</h1>
+                                <input class="campos" type="text" name="pax" required>
+                             </div>
+                             <div class ="left"></div>
+                             <div class ="left">
+                                <input class="boton__registro"type="submit" value="Crear Cita">
+                             </div>
+                             <div class ="left"></div>
+
+                    </form>
+
+                </div>
+            </div>
+           
+        </div>
+    
+    </main>
+</body>
+
+</html>
