@@ -1,7 +1,40 @@
 from flask import Flask
-from flask import render_template as render
+from flask import render_template as render, request
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import *
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
+app.secret_key="1234"
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+db=SQLAlchemy(app)
+
+class base(db.Model):
+    __abstract__ = True
+    cedula = db.Column(db.Integer, primary_key=True)
+
+class users(base):
+    __tablename__ = 'users'
+    nombre=db.Column(db.String)
+    apellido=db.Column(db.String)
+    nacimiento=db.Column(db.String)
+    eps=db.Column(db.String)
+    email=db.Column(db.String, unique=True)
+    telefono=db.Column(db.Integer)
+    dir=db.Column(db.String)
+    ciudad=db.Column(db.String)
+    password=db.Column(db.String)
+    rol =db.Column(db.String)
+
+    def __repr__(self):
+        return "usuario registrado" + str(self.id)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+         return check_password_hash(self.password, password)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -9,12 +42,46 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        usuarioUno =request.form['cedula']
+        password = request.form['contrasena']        
+        
+        usuario= users.query.filter_by(cedula=usuarioUno).first()
+        admin = users.query.filter_by(rol='admin')
+        medico= users.query.filter_by(rol='medico')
+        paciente= users.query.filter_by(rol='paciente')
+        if usuario:                      
+            if usuario.check_password(password):
+                return redirect('dashboard') 
+
+
+
     return render('login.html')
 
 @app.route('/registro', methods=['GET','POST'])
-def registro():
-    return render('registro.html')
+def registro(): 
+    if request.method == 'POST':
+        cedula = request.form['cedula']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        nacimiento = request.form['nacimiento']
+        eps = request.form['eps']
+        email = request.form['email']
+        tel = request.form['tel']
+        direccion = request.form['dir']
+        ciudad = request.form['ciudad']
+        password = request.form['contrasena']
 
+        usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, eps=eps, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password)
+        usuario.set_password(password)
+        db.session.add(usuario)
+        db.session.commit()
+        
+        if usuario:
+            return render('login.html')
+
+    return render('registro.html')
+    
 @app.route('/politica-privacidad', methods=['GET'])
 def politica_privacidad():
     return render('politica_privacidad.html')
@@ -169,4 +236,5 @@ def historia_paciente():
     return render('pac-historia.html')
 
 if __name__ == '__main__': 
+    db.create_all()
     app.run(debug=True, port=8000)
