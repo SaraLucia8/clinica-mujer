@@ -1,8 +1,8 @@
-from flask import Flask
-from flask import render_template as render, request
+from flask import Flask, render_template as render, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import *
 from werkzeug.utils import redirect
+
 
 app = Flask(__name__)
 app.secret_key="1234"
@@ -44,19 +44,24 @@ def index():
 def login():
     if request.method == 'POST':
         usuarioUno =request.form['cedula']
-        password = request.form['contrasena']        
+        password = request.form['contrasena']      
         
         usuario= users.query.filter_by(cedula=usuarioUno).first()
-        admin = users.query.filter_by(rol='admin')
+        session['usuarioIngresado']=usuarioUno 
+        """ admin = users.query.filter_by(rol='admin')
         medico= users.query.filter_by(rol='medico')
-        paciente= users.query.filter_by(rol='paciente')
+        paciente= users.query.filter_by(rol='paciente') """
         if usuario:                      
             if usuario.check_password(password):
                 return redirect('dashboard') 
-
-
-
+            
     return render('login.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('login')
+
 
 @app.route('/registro', methods=['GET','POST'])
 def registro(): 
@@ -97,7 +102,10 @@ def contacto():
 # ************ADMIN************
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-    return render('dashboard.html')
+    if 'usuarioIngresado' in session:
+        return render('dashboard.html')
+    else:
+        return 'no tiene permisos pa esta vuelta'
 
 #Medico
 @app.route('/medico', methods=['GET'])
