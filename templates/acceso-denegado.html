@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo-denegado.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+    <title>Acceso Denegado</title>
+</head>
+<body>
+    <div class="contenedor__notificacion">
+        <div class="contenedor__banner">            
+            <img src="{{ url_for('static', filename='images/icono.png')}}" alt="Banner" width="70px" height="90px">
+            <h2>Clínica de <br> La Mujer</h2>
+           
+        </div>
+            <div class="notificacion">
+                <h3>Si quieres tener acceso a nuestra plataforma y disfrutar de todos los beneficios que la Clinica de la Mujer tiene para tí... <br> <br> Por favor inicia sesión. </h3>
+            </div>           
+            <a href="login"  class="boton__registro"type="button"> Inicia Sesión</a> 
+            <br>
+        </div>        
+    </div>
+    
+</body>
+</html>
