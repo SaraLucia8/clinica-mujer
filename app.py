@@ -118,10 +118,23 @@ def dashboard():
         return render('acceso-denegado.html')
 
 #Medico
+#Medico
 @app.route('/medico', methods=['GET'])
 def medicouser():
     if 'usuarioIngresado' in session:
-        return render('medicos.html')
+        medicos = db.session.query(users.cedula, 
+        users.nombre, 
+        users.apellido, 
+        users.nacimiento, 
+        users.email, 
+        users.telefono, 
+        users.dir, 
+        users.ciudad, 
+        users.password, 
+        users.rol, 
+        users.especialidad).where(users.rol == 'medico')
+        print(medicos)
+        return render('medicos.html', data = medicos)
     else:
         return render('acceso-denegado.html')
     
@@ -137,15 +150,34 @@ def medico():
 @app.route('/medico/new', methods=['GET', 'POST'])
 def new_medico():
     if 'usuarioIngresado' in session:
+        if request.method == 'POST':
+            cedula = request.form['cedula']
+            nombre = request.form['nombre']
+            apellido = request.form['apellido']
+            nacimiento = request.form['nacimiento']
+            especialidad = request.form['especialidad']
+            email = request.form['email']
+            tel = request.form['tel']
+            direccion = request.form['dir']
+            ciudad = request.form['ciudad']
+            password = request.form['contrasena']
+            rol = 'medico'
+
+            usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol, especialidad = especialidad)
+            usuario.set_password(password)
+            db.session.add(usuario)
+            db.session.commit()
+
         return render('new_medico.html')
     else:
         return render('acceso-denegado.html')
+    
     
 
 @app.route('/medico/user/editar', methods=['GET', 'POST'])
 def edit_medico():
     if 'usuarioIngresado' in session:
-        return render('editmedico.html')
+        return render('new_medico.html')
     else:
         return render('acceso-denegado.html')
     
