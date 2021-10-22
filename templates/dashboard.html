@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard administrativo</title>
-    <link rel="shortcut icon" href="img/icono.png">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
         <nav>
             <ul class="menu">
                 <li class="menuitems"><a href="medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
@@ -25,12 +25,11 @@
             <input type="search" class="search" placeholder="Buscar medico o paciente">
             <div class="perfil">
                 <div>
-                    <span class="nameuser">Ana Ortiz</span><br>
+                    <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
                     <span class="roluser">Admin</span>
-                    <a href="/logout" type="button" class="btn">Cerrar sesion</a>
                 </div>
                 <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
-                <img src="{{ url_for('static', filename='images/triangulo.png')}}" class="triangulo" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
             </div> 
         </div>
         <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->

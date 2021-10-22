@@ -42,6 +42,11 @@ body {
     width: 45%;
 }
 
+.logout {
+    height: 2rem;
+    margin-left: 2rem;
+}
+
 .contenedorcitas {
     height: 100%;
     width: 45%;
@@ -82,7 +87,6 @@ body {
     align-items: center;
     text-align: right;
     margin-left: 2rem;
-    width: 10rem;
     justify-content: flex-end;
 }
 

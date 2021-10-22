@@ -10,7 +10,7 @@
 </head>
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
         <nav>
             <ul class="menu">
                 <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
@@ -27,33 +27,30 @@
                 <input type="search" class="search" placeholder="Buscar paciente">
                 <div class="perfil">
                     <div>
-                        <span class="nameuser">Ana Ortiz</span><br>
+                        <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
                         <span class="roluser">Admin</span>
                     </div>
                     <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
-                    <img src="{{ url_for('static', filename='images/triangulo.png')}}" class="triangulo" alt="">
+                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
                 </div> 
             </div>
         </div>
         <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
-            <!-- <h1 class="titulo"><span style="color:#F72B50">Bienvenido a la </span><span style="color:#450B5A">Clinica de la Mujer</span></h1> -->
-            <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p>
-            <img src="img/background.jpg" class="background" alt=""> -->
             <div class="pacienteperfil">
                 <div class="perfilcitas">
                     <div class="contenedorperfil">
                         <div class="userperf">
                             <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="userper" alt="">
-                            <h1 class="username">Juan Pablo Mesa</h1>
+                            <h1 class="username">{{data.nombre}} {{data.apellidos}}</h1>
                         </div>
                         <div class="userinfo">
                             <h2 class="infotitle">Informacion basica</h2><br>
-                            <span style="color:#450B5A">Fecha de Nacimiento </span><span style="color:#000000">21/04/1990</span> <br><br>
-                            <span style="color:#450B5A">EPS </span><span style="color:#000000">Emssanar</span> <br><br>
-                            <span style="color:#450B5A">Email </span><span style="color:#000000">juanmesa@gmail.com</span><br><br>
-                            <span style="color:#450B5A">Telefono </span><span style="color:#000000">312 564 7890</span> <br><br>
-                            <span style="color:#450B5A">Direcccion </span><span style="color:#000000">Calle 1 #23-45</span> <br><br>
-                            <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">Cali, Valle del Cauca</span> <br><br>
+                            <span style="color:#450B5A">Fecha de Nacimiento </span><span style="color:#000000">{{data.nacimiento}}</span> <br><br>
+                            <span style="color:#450B5A">EPS </span><span style="color:#000000">{{data.eps}}</span> <br><br>
+                            <span style="color:#450B5A">Email </span><span style="color:#000000">{{data.email}}</span><br><br>
+                            <span style="color:#450B5A">Telefono </span><span style="color:#000000">{{data.telefono}}</span> <br><br>
+                            <span style="color:#450B5A">Direcccion </span><span style="color:#000000">{{data.dir}}</span> <br><br>
+                            <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">{{data.ciudad}}</span> <br><br>
                         </div>
                     </div>
                     <div class="contenedorcitas">

@@ -87,7 +87,6 @@ body {
     align-items: center;
     text-align: right;
     margin-left: 2rem;
-    width: 10rem;
     justify-content: flex-end;
 }
 
@@ -231,6 +230,10 @@ p {
 .profile {
     height: 2.5rem;
     margin-left: 0.5rem;
+}
+.logout {
+    height: 2rem;
+    margin-left: 2rem;
 }
 
 .search {

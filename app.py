@@ -1,6 +1,5 @@
-from flask import Flask, render_template as render, request, flash, session
+from flask import Flask, render_template as render, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.exceptions import RequestHeaderFieldsTooLarge
 from werkzeug.security import *
 from werkzeug.utils import redirect
 
@@ -8,14 +7,11 @@ app = Flask(__name__)
 app.secret_key="1234"
 app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
-db=SQLAlchemy(app)
+db=SQLAlchemy(app)    
 
-class base(db.Model):
-    __abstract__ = True
-    cedula = db.Column(db.Integer, primary_key=True)
-
-class users(base):
+class users(db.Model):
     __tablename__ = 'users'
+    cedula = db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String)
     apellido=db.Column(db.String)
     nacimiento=db.Column(db.String)
@@ -38,6 +34,21 @@ class users(base):
     def check_password(self, password):
          return check_password_hash(self.password, password)
 
+class citas(db.Model):
+    __tablename__ = 'citas'
+    cita_id=db.Column(db.String, primary_key=True)
+    medico_id=db.Column(db.String, db.ForeignKey("users.cedula"))
+    paciente_id=db.Column(db.String, db.ForeignKey("users.cedula"))
+    fecha = db.Column(db.String)
+    motivo = db.Column(db.String(500))
+    estado = db.Column(db.Boolean)
+    hora_atencion = db.Column(db.String)
+    sintomas = db.Column(db.String)
+    diagnostico = db.Column(db.String)
+    recomendaciones = db.Column(db.String)
+    calificacion = db.Column(db.Integer)
+    calificacion_obs = db.Column(db.String)
+
 @app.route('/', methods=['GET'])
 def index():
     return render('index.html')
@@ -52,7 +63,7 @@ def login():
         if usuario:
             if usuario.rol == 'admin':                      
                 if usuario.check_password(password):
-                    return redirect('dashboard')
+                    return redirect(url_for('dashboard'))
             elif usuario.rol == 'medico':
                 if usuario.check_password(password):
                     return redirect('dashboard-medico')
@@ -82,7 +93,7 @@ def registro():
         ciudad = request.form['ciudad']
         password = request.form['contrasena']
         rol = 'paciente'
-        estado=True
+        estado= True
 
         usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, eps=eps, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol, estado=estado)
         usuario.set_password(password)
@@ -114,7 +125,8 @@ def denegado():
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
     if 'usuarioIngresado' in session:
-        return render('dashboard.html')
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('dashboard.html', row=usuario)
     else:
         return render('acceso-denegado.html')
 
@@ -123,20 +135,20 @@ def dashboard():
 def medicouser():
     if 'usuarioIngresado' in session:
         medicos = users.query.filter_by(rol='medico')
-        return render('medicos.html', listamedicos = medicos)
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('medicos.html', listamedicos = medicos, row = usuario)
     else:
         return render('acceso-denegado.html')
-    
 
 @app.route('/medico/<user>', methods=['GET'])
 def medico(user):
     if 'usuarioIngresado' in session:
         medicos = users.query.filter_by(cedula=user).first()
-        return render('usermedico.html', row=medicos)
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('usermedico.html', data=medicos, row=usuario)
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/medico/new', methods=['GET', 'POST'])
 def new_medico():
     if 'usuarioIngresado' in session:
@@ -152,8 +164,9 @@ def new_medico():
             ciudad = request.form['ciudad']
             password = request.form['contrasena']
             rol = 'medico'
+            estado = True
 
-            usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol, especialidad = especialidad)
+            usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol, especialidad = especialidad, estado = estado)
             usuario.set_password(password)
             db.session.add(usuario)
             db.session.commit()
@@ -161,25 +174,40 @@ def new_medico():
         return render('new_medico.html')
     else:
         return render('acceso-denegado.html')
-    
-    
 
-@app.route('/medico/user/editar', methods=['GET', 'POST'])
-def edit_medico():
+@app.route('/medico/<user>/editar', methods=['GET', 'POST'])
+def edit_medico(user):
     if 'usuarioIngresado' in session:
-        return render('new_medico.html')
+        medico = users.query.filter_by(cedula=user).first()
+        if request.method == 'POST':
+            medico.nombre = request.form['nombre']
+            medico.apellido = request.form['apellido']
+            medico.nacimiento = request.form['nacimiento']
+            medico.especialidad = request.form['especialidad']
+            medico.email = request.form['email']
+            medico.telefono = request.form['telefono']
+            medico.dir = request.form['dir']
+            medico.ciudad = request.form['ciudad']
+            medico.password = request.form['password']
+
+            db.session.commit()
+
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('editmedico.html', data=medico,row=usuario)
     else:
-        return render('acceso-denegado.html')
-    
+        return render('acceso-denegado.html') 
 
-@app.route('/medico/user/eliminar', methods=['GET', 'POST'])
-def delete_medico():
+@app.route('/medico/<user>/eliminar', methods=['GET', 'POST'])
+def delete_medico(user):
     if 'usuarioIngresado' in session:
+        medico = users.query.filter_by(cedula=user).first()
+        medico.estado = 0
+
+        db.session.commit()
         return render('deletemedico.html')
     else:
         return render('acceso-denegado.html')
         
-
 #Historia clinica
 @app.route('/historia-clinica', methods=['GET'])
 def historia():
@@ -188,7 +216,6 @@ def historia():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/historia-clinica/paciente/editar', methods=['GET', 'POST'])
 def edit_historia():
     if 'usuarioIngresado' in session:
@@ -196,7 +223,6 @@ def edit_historia():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/historia-clinica/paciente/eliminar', methods=['GET', 'POST'])
 def delete_historia():
     if 'usuarioIngresado' in session:
@@ -204,7 +230,6 @@ def delete_historia():
     else:
         return render('acceso-denegado.html')
     
-
 #Citas
 @app.route('/listado-citas', methods=['GET'])
 def listado_citas():
@@ -213,7 +238,6 @@ def listado_citas():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/listado-citas/cita', methods=['GET'])
 def detalle_citas():
     if 'usuarioIngresado' in session:
@@ -221,7 +245,6 @@ def detalle_citas():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/listado-citas/cita/editar', methods=['GET', 'POST'])
 def editar_citas():
     if 'usuarioIngresado' in session:
@@ -229,7 +252,6 @@ def editar_citas():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/listado-citas/cita/eliminar', methods=['GET', 'POST'])
 def delete_citas():
     if 'usuarioIngresado' in session:
@@ -237,52 +259,68 @@ def delete_citas():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/form', methods=['GET', 'POST'])
 @app.route('/form-cita', methods=['GET', 'POST'])
 def formcita():
     if 'usuarioIngresado' in session:
-        return render('form-cita.html')
+        return render('formcita.html')
     else:
         return render('acceso-denegado.html')
     
-
 #Pacientes
 @app.route('/paciente', methods=['GET'])
 def paciente():
     if 'usuarioIngresado' in session:
-        return render('pacientes.html')
+        pacientes = users.query.filter_by(rol='paciente')
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        print(session['usuarioIngresado'])
+        return render('pacientes.html', listapacientes = pacientes, row = usuario)
     else:
-        return render('acceso-denegado.html')    
+        return render('acceso-denegado.html')  
 
-# @app.route('/paciente/<user>', methods=['GET'])
-# def userPaciente(user):
-#     return render('layout-paciente.html', user = user, nacimiento = '1/10/1800', eps = 'SURA', correo='example@uninorte.com.co', cel= 3160000000, dir= 'cali' , ciudad='Cali, Valle')
-
-@app.route('/paciente/user', methods=['GET'])
-def view_paciente():
+@app.route('/paciente/<user>', methods=['GET'])
+def view_paciente(user):
     if 'usuarioIngresado' in session:
-        return render('userpaciente.html')
+        paciente = users.query.filter_by(cedula=user).first()
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('userpaciente.html', data=paciente, row=usuario)
     else:
         return render('acceso-denegado.html')   
     
-
-@app.route('/paciente/user/editar', methods=['GET', 'POST'])
-def edit_paciente():
+@app.route('/paciente/<user>/editar', methods=['GET', 'POST'])
+def edit_paciente(user):
     if 'usuarioIngresado' in session:
-        return render('editpaciente.html')
+        paciente = users.query.filter_by(cedula=user).first()
+        if request.method == 'POST':
+            paciente.nombre = request.form['nombre']
+            paciente.apellido = request.form['apellido']
+            paciente.nacimiento = request.form['nacimiento']
+            paciente.eps = request.form['eps']
+            paciente.email = request.form['email']
+            paciente.telefono = request.form['telefono']
+            paciente.dir = request.form['dir']
+            paciente.ciudad = request.form['ciudad']
+            paciente.password = request.form['password']
+
+            db.session.commit()
+
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('editpaciente.html', data=paciente,row=usuario)
     else:
         return render('acceso-denegado.html') 
     
-
-@app.route('/paciente/user/eliminar', methods=['GET', 'POST'])
-def delete_paciente():
+@app.route('/paciente/<user>/eliminar', methods=['GET', 'POST'])
+def delete_paciente(user):
     if 'usuarioIngresado' in session:
+        paciente = users.query.filter_by(cedula=user).first()
+        paciente.estado = 0
+
+        db.session.commit()
+
         return render('deletepaciente.html')
     else:
         return render('acceso-denegado.html') 
     
-
 #Roles y permisos 
 @app.route('/roles', methods=['GET'])
 def roles():
@@ -290,7 +328,6 @@ def roles():
         return render('roles.html')
     else:
         return render('acceso-denegado.html') 
-    
 
 @app.route('/roles/new', methods=['GET', 'POST'])
 def new_rol():
@@ -299,9 +336,6 @@ def new_rol():
     else:
         return render('acceso-denegado.html') 
     
-
-
-
 # ************MEDICO************
 @app.route('/dashboard-medico', methods=['GET'])
 def dashboard_medico():
@@ -324,7 +358,6 @@ def historia_medico():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/medico/historia-clinica/user', methods=['GET'])
 def ver_medico():
     if 'usuarioIngresado' in session:
@@ -332,7 +365,6 @@ def ver_medico():
     else:
         return render('acceso-denegado.html')
    
-
 @app.route('/medico/historia-clinica/user/newcoment', methods=['GET', 'POST'])
 def comentar_medico():
     if 'usuarioIngresado' in session:
@@ -340,7 +372,6 @@ def comentar_medico():
     else:
         return render('acceso-denegado.html')
     
-
 # ************PACIENTE************
 @app.route('/dashboard-paciente', methods=['GET'])
 def dashboard_paciente():
@@ -349,7 +380,6 @@ def dashboard_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mis-citas', methods=['GET'])
 def citas_paciente():
     if 'usuarioIngresado' in session:
@@ -357,7 +387,6 @@ def citas_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mis-citas/agendar', methods=['GET', 'POST'])
 def newcitas_paciente():
     if 'usuarioIngresado' in session:
@@ -365,7 +394,6 @@ def newcitas_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mis-citas/calificar', methods=['GET', 'POST'])
 def calificar_cita_paciente():
     if 'usuarioIngresado' in session:
@@ -373,7 +401,6 @@ def calificar_cita_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mis-citas/editar', methods=['GET', 'POST'])
 def editar_cita_paciente():
     if 'usuarioIngresado' in session:
@@ -381,7 +408,6 @@ def editar_cita_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mis-citas/eliminar', methods=['GET', 'POST'])
 def eliminar_cita_paciente():
     if 'usuarioIngresado' in session:
@@ -389,7 +415,6 @@ def eliminar_cita_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 @app.route('/mi-historia-clinica', methods=['GET'])
 def historia_paciente():
     if 'usuarioIngresado' in session:
@@ -397,7 +422,7 @@ def historia_paciente():
     else:
         return render('acceso-denegado.html')
     
-
 if __name__ == '__main__': 
     db.create_all()
+    extend_existing=True
     app.run(debug=True, port=8000)

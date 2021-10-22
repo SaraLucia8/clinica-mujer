@@ -29,71 +29,35 @@
                 <input type="search" class="search" placeholder="Buscar paciente">
                 <div class="perfil">
                     <div>
-                        <span class="nameuser">Ana Ortiz</span><br>
+                        <span class="nameuser">{{row.nombre}} {{row.apellido}}</span><br>
                         <span class="roluser">Admin</span>
                     </div>
                     <img src="{{ url_for('static', filename='images/test_account_100px.png')}}"  class="profile" alt="">
-                    <img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="triangulo" alt="">
+                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
                 </div> 
             </div>
         </div>
         <div class="cuerpo">
             <!--En este espacio va la informacion especifica de cada pagina -->
             <h1 class="titulo"><span style="color:#F72B50">Pacientes</span></h1>
-            <div class="contenedor_user">
-                <div class="nom_img">
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                    <span class="nombre_user">Juan Pablo Mesa</span>
-                </div>
-                <div class="contenedortbtn"> 
-                    <a href="paciente/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                </div>
-            </div>
-            <div class="contenedor_user">
-                <div class="nom_img">
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                    <span class="nombre_user">Juan Pablo Mesa</span>
-                </div>
-                <div class="contenedortbtn"> 
-                    <a href="paciente/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                </div>
-            </div>
-            <div class="contenedor_user">
-                <div class="nom_img">
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                    <span class="nombre_user">Juan Pablo Mesa</span>
-                </div>
-                <div class="contenedortbtn"> 
-                    <a href="paciente/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                </div>
-            </div>
-            <div class="contenedor_user">
-                <div class="nom_img">
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                    <span class="nombre_user">Juan Pablo Mesa</span>
-                </div>
-                <div class="contenedortbtn"> 
-                    <a href="paciente/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                </div>
-            </div>
-            <div class="contenedor_user">
-                <div class="nom_img">
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                    <span class="nombre_user">Juan Pablo Mesa</span>
-                </div>
-                <div class="contenedortbtn"> 
-                    <a href="paciente/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="paciente/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                </div>
+            <div>
+                <ul>
+                    {% for data in listapacientes %}
+                        {% if data.estado == 1 %}             
+                        <div class="contenedor_user">
+                            <div class="nom_img">
+                                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
+                                <span class="nombre_user">{{data.nombre}} {{data.apellido}}</span>
+                            </div>
+                            <div class="contenedortbtn"> 
+                                <a href="paciente/{{data.cedula}}" ><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
+                                <a href="paciente/{{data.cedula}}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                                <a href="paciente/{{data.cedula}}/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                            </div>
+                        </div>
+                        {% endif %} 
+                    {% endfor %}
+                </ul>
             </div>
     </main>
 </body>
