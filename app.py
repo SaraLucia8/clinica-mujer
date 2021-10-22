@@ -82,8 +82,9 @@ def registro():
         ciudad = request.form['ciudad']
         password = request.form['contrasena']
         rol = 'paciente'
+        estado=True
 
-        usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, eps=eps, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol)
+        usuario = users(cedula= cedula, nombre=nombre, apellido= apellido, nacimiento = nacimiento, eps=eps, email=email, telefono=tel, dir=direccion, ciudad=ciudad, password=password, rol = rol, estado=estado)
         usuario.set_password(password)
         db.session.add(usuario)
         db.session.commit()
@@ -118,31 +119,20 @@ def dashboard():
         return render('acceso-denegado.html')
 
 #Medico
-#Medico
 @app.route('/medico', methods=['GET'])
 def medicouser():
     if 'usuarioIngresado' in session:
-        medicos = db.session.query(users.cedula, 
-        users.nombre, 
-        users.apellido, 
-        users.nacimiento, 
-        users.email, 
-        users.telefono, 
-        users.dir, 
-        users.ciudad, 
-        users.password, 
-        users.rol, 
-        users.especialidad).where(users.rol == 'medico')
-        print(medicos)
-        return render('medicos.html', data = medicos)
+        medicos = users.query.filter_by(rol='medico')
+        return render('medicos.html', listamedicos = medicos)
     else:
         return render('acceso-denegado.html')
     
 
-@app.route('/medico/user', methods=['GET'])
-def medico():
+@app.route('/medico/<user>', methods=['GET'])
+def medico(user):
     if 'usuarioIngresado' in session:
-        return render('usermedico.html')
+        medicos = users.query.filter_by(cedula=user).first()
+        return render('usermedico.html', row=medicos)
     else:
         return render('acceso-denegado.html')
     

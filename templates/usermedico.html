@@ -36,21 +36,18 @@
             </div>
         </div>
         <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
-            <!-- <h1 class="titulo"><span style="color:#F72B50">Bienvenido a la </span><span style="color:#450B5A">Clinica de la Mujer</span></h1> -->
-            <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p>
-            <img src="img/background.jpg" class="background" alt=""> -->
             <div class="contenedorperfil">
                 <div class="userperf">
                     <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="userper" alt="">
-                    <h1 class="username">Dra. Camila Gil</h1>
+                    <h1 class="username">{{row ["nombre"]}}  {{row ["apellido"]}}</h1>
                 </div>
                 <div class="userinfo">
                     <h2 class="infotitle">Informacion basica</h2><br>
-                    <span style="color:#450B5A">Especialidad </span><span style="color:#000000">Medicina General</span> <br><br>
-                    <span style="color:#450B5A">Email </span><span style="color:#000000">camilagil@clinicadelamujer.com</span><br><br>
-                    <span style="color:#450B5A">Telefono </span><span style="color:#000000">312 564 7890</span> <br><br>
-                    <span style="color:#450B5A">Direcccion </span><span style="color:#000000">Calle 1 #23-45</span> <br><br>
-                    <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">Cali, Valle del Cauca</span> <br><br>
+                    <span style="color:#450B5A">Especialidad </span><span style="color:#000000">{{row ["especialidad"]}}</span> <br><br>
+                    <span style="color:#450B5A">Email </span><span style="color:#000000">{{row ["email"]}}</span><br><br>
+                    <span style="color:#450B5A">Telefono </span><span style="color:#000000">{{row ["telefono"]}}</span> <br><br>
+                    <span style="color:#450B5A">Direcccion </span><span style="color:#000000">{{row ["dir"]}}</span> <br><br>
+                    <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">{{row ["ciudad"]}}</span> <br><br>
                     <div class="contenedordbtn">
                         <a href="user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
                         <a href="user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>

@@ -39,21 +39,25 @@
         </div>
         <div class="cuerpo">
             <!--En este espacio va la informacion especifica de cada pagina -->
-
             <h1 class="titulo"><span style="color:#F72B50">Medicos</span></h1>
-            {% for item in data %}
-                <div class="contenedor_user">
-                    <div class="nom_img">
-                        <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
-                        <span class="nombre_user">{{item[1]}} {{item[2]}} </span>
-                    </div>
-                    <div class="contenedortbtn"> 
-                        <a href="medico/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                        <a href="medico/user/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                        <a href="medico/user/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                    </div>
-                </div>
-            {% endfor %}
+            <div>
+                <ul>
+                    {% for data in listamedicos %}            
+                        <div class="contenedor_user">
+                            <div class="nom_img">
+                                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
+                                <span class="nombre_user">{{data.nombre}} {{data.apellido}}</span>
+                            </div>
+                            <div class="contenedortbtn"> 
+                                <a href="medico/{{data.cedula}}" ><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
+                                <a href="medico/{{data.cedula}}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                                <a href="medico/{{data.cedula}}/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+            </div>
+
     </main>
 </body>
 
