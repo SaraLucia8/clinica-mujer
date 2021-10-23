@@ -51,6 +51,30 @@ class citas(db.Model):
 
     users = db.relationship('users', backref=db.backref('usuarios', lazy=True))
 
+class roles(db.Model):
+    __tablename__   = 'Cli_rol'
+    id_rol  = db.Column(db.String,  primary_key=True)
+    nom_rol = db.Column(db.String)
+    users = db.relationship('users', backref=db.backref('usuarios_per', lazy=True))
+
+class actividades(db.Model):
+    __tablename__   = 'Cli_actividad'
+    id_actividad  = db.Column(db.String,  primary_key=True)
+    nom_actividad = db.Column(db.String)
+    users = db.relationship('users', backref=db.backref('usuarios_per', lazy=True))
+
+class permisos(db.Model):
+    __tablename__   = 'Cli_permiso'
+    id_rol          = db.Column(db.String, db.ForeignKey("cli_rol.id_rol", onupdate="cascade", ondelete="cascade"), nullable=False, primary_key=True )
+    id_actividad    = db.Column(db.String, db.ForeignKey("cli_rol.id_rol", onupdate="cascade", ondelete="cascade"), nullable=False, primary_key=True)
+    id_crea         = db.Column(db.String)
+    id_consulta     = db.Column(db.String)
+    id_actualiza    = db.Column(db.String)
+    id_elimina      = db.Column(db.String)
+    id_desactiva    = db.Column(db.String)
+    users = db.relationship('users', backref=db.backref('usuarios_per', lazy=True))
+
+
 @app.route('/', methods=['GET'])
 def index():
     return render('index.html')
