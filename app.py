@@ -1,5 +1,6 @@
 from flask import Flask, render_template as render, request, flash, session, url_for
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship
 from werkzeug.security import *
 from werkzeug.utils import redirect
 
@@ -24,9 +25,8 @@ class users(db.Model):
     rol =db.Column(db.String)
     especialidad = db.Column(db.String)
     estado = db.Column(db.Boolean)
-
-    def __repr__(self):
-        return "usuario registrado" + str(self.cedula)
+    # def __repr__(self):
+    #    return self.cedula
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -36,9 +36,9 @@ class users(db.Model):
 
 class citas(db.Model):
     __tablename__ = 'citas'
-    cita_id=db.Column(db.String, primary_key=True)
-    medico_id=db.Column(db.String, db.ForeignKey("users.cedula"))
-    paciente_id=db.Column(db.String, db.ForeignKey("users.cedula"))
+    cita_id=db.Column(db.Integer, primary_key=True)
+    medico_id = db.Column(db.Integer, db.ForeignKey("users.cedula", onupdate="cascade", ondelete="cascade"), nullable=False)
+    paciente_id = db.Column(db.Integer, db.ForeignKey("user.cedula", onupdate="cascade", ondelete="cascade"), nullable=False)
     fecha = db.Column(db.String)
     motivo = db.Column(db.String(500))
     estado = db.Column(db.Boolean)
@@ -48,6 +48,8 @@ class citas(db.Model):
     recomendaciones = db.Column(db.String)
     calificacion = db.Column(db.Integer)
     calificacion_obs = db.Column(db.String)
+
+    users = db.relationship('users', backref=db.backref('usuarios', lazy=True))
 
 @app.route('/', methods=['GET'])
 def index():
@@ -136,7 +138,7 @@ def medicouser():
     if 'usuarioIngresado' in session:
         medicos = users.query.filter_by(rol='medico')
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
-        return render('medicos.html', listamedicos = medicos, row = usuario)
+        return render('medicos.html', listamedicos = medicos, row=usuario)
     else:
         return render('acceso-denegado.html')
 
@@ -231,12 +233,24 @@ def delete_historia():
         return render('acceso-denegado.html')
     
 #Citas
-@app.route('/listado-citas', methods=['GET'])
-def listado_citas():
+@app.route('/listado-citas', methods=['GET','POST'])
+def listado():
     if 'usuarioIngresado' in session:
-        return render('listado-citas.html')
+        medicos = users.query.filter_by(rol='medico')
+        return render('listado-citas.html', listamedicos=medicos)
     else:
         return render('acceso-denegado.html')
+
+@app.route('/listado-citas/<cedulam>', methods=['GET','POST'])
+def listado_citas(cedulam):
+    if 'usuarioIngresado' in session:
+        medicos = users.query.filter_by(rol='medico')
+        pacientes = users.query.filter_by(rol='paciente')
+        citass= citas.query.filter_by(medico_id=cedulam).all()
+        return render('listado-citas.html', listamedicos=medicos, listacitas=citass, listapacientes=pacientes)
+    else:
+        return render('acceso-denegado.html')
+
     
 @app.route('/listado-citas/cita', methods=['GET'])
 def detalle_citas():
@@ -283,6 +297,8 @@ def view_paciente(user):
     if 'usuarioIngresado' in session:
         paciente = users.query.filter_by(cedula=user).first()
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        print(paciente)
+        print(usuario)
         return render('userpaciente.html', data=paciente, row=usuario)
     else:
         return render('acceso-denegado.html')   

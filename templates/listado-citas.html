@@ -24,9 +24,18 @@
     </header>
     <main class="main">
         <div class="searchuser">
-            <a href="/form-cita" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}" class="profile" alt=""><span>Nueva cita</span></a>
+            <!-- <a href="/form-cita" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}" class="profile" alt=""><span>Nueva cita</span></a> -->
+            <select name="medicoselect" onchange="window.location.href=this.options[this.options.selectedIndex].value" class="campo-eps" >
+                <option selected="selected disabled">Selecciona médico</option>
+                {% for data in listamedicos %}
+                <option value="/listado-citas/{{ data.cedula }}" class="opciones">{{data.nombre}} {{data.apellido}}</option>
+                {% endfor %}
+            </select>            
             <div>
-                <input type="search" class="search" placeholder="Buscar medico o paciente">
+
+            </div>
+            <div>
+                <!-- <input type="search" class="search" placeholder="Buscar medico o paciente"> -->
                 <div class="perfil">
                     <div>
                         <span class="nameuser">Ana Ortiz</span><br>
@@ -39,16 +48,23 @@
         </div>
         <!--En este espacio va la informacion especifica de cada pagina -->
         <div class="cuerpo">
-            <h1 class="titulo"><span style="color:#F72B50">Citas pendientes</span></h1>
+            <h1 class="titulo"><span style="color:#F72B50">Citas</span></h1>
+            {% for data in listacitas %}
             <div class="infocita">
                 <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
+                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>{{ data.fecha }}</span>
                 </div>
                 <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
+                    <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>{{ data.motivo }}</span>
                 </div>
                 <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
+                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt="">
+                    {% for t in listapacientes %}
+                        {% if t.cedula == data.paciente_id %}
+                        <span>{{ t.nombre }} {{ t.apellido }}</span>
+                        {% endif %}
+                    {% endfor %}
+                    
                 </div>
                 <div class="contenedortbtn">
                     <a href="/listado-citas/cita"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
@@ -56,53 +72,7 @@
                     <a href="/listado-citas/cita/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
                 </div>
             </div>
-            <div class="infocita">
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
-                </div>
-                <div class="contenedortbtn">
-                    <a href="/listado-citas/cita"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
-                </div>
-            </div>
-            <div class="infocita">
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
-                </div>
-                <div class="contenedortbtn">
-                    <a href="/listado-citas/cita"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
-                </div>
-            </div>
-            <div class="infocita">
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
-                </div>
-                <div class="diahora">
-                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
-                </div>
-                <div class="contenedortbtn">
-                    <a href="/listado-citas/cita"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                    <a href="/listado-citas/cita/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
-                </div>
+            {% endfor %}
             </div>
         </div>
     </main>

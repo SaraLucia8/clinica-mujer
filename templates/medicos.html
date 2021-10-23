@@ -29,7 +29,7 @@
                 <input type="search" class="search" placeholder="Buscar medico">
                 <div class="perfil">
                     <div>
-                        <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
+                        <span class="nameuser">{{row.nombre}} {{row.apellido}}</span><br>
                         <span class="roluser">Admin</span>
                     </div>
                     <img src="{{ url_for('static', filename='images/test_account_100px.png')}}"  class="profile" alt="">
