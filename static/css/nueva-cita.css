@@ -1,0 +1,41 @@
+.boton__nuevopaciente {
+    width: 10rem;
+    height: 2.5rem;
+    margin-right: 2.5rem;
+    opacity: 1.2;
+    background: #F72B50;
+    border-radius: 14px;
+    border: 0.15rem solid #F72B50;
+    display: inline-flex;
+    place-items:center ;
+}
+
+h2{
+    
+    font-family: Ropa Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 20px;
+    
+    color: #F72B50;
+}
+.lista_container{
+    height: 470px;
+}
+
+.space {
+    width: 70px;
+}
+.img-container{
+    width: 357px;
+    height: 490px;
+    background-image: url(/static/images/Sin-titulo-2.jpg);
+    border-radius: 27px;
+    margin-top: 20px
+}
+
+.lista_container{
+    height: 470px !important;
+
+}

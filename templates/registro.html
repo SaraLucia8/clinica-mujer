@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo-registro.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="contenedor__registro">
+        <div class="contenedor__banner">            
+            <img src="{{ url_for('static', filename='images/icono.png')}}" alt="Banner" width="70px" height="90px">
+            <h2>Clínica de <br> La Mujer</h2>
+           
+        </div>
+            <div class="bienvenida">
+                <h3>Bienvenida a la Clínica de la Mujer</h3>
+            </div>            
+        <form class="formulario__registro" id="formulario" name="formulario" method="post">
+            <div class="campos-30">
+                <h3>Número de identificación</h3>
+                <input class="campos" type="text" id="cedula" name="cedula" required>
+            </div>
+            <div class="campos-30">
+                <h3>Nombre(s)</h3>
+                <input class="campos" type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="campos-30">
+                <h3>Apellido(s)</h3>
+                <input class="campos" type="text" id="apellido" name="apellido" required>
+            </div>
+            <div class="campos-30">
+                <h3>Fecha de Nacimiento</h3>
+                <input class="campos" type="date" id="nacimiento" name="nacimiento" required>
+            </div>
+            <div class="campos-30">
+                <h3>EPS</h3>
+                <select name="eps" id="eps" class="campo-eps" required>
+                    <option></option>
+                    <option value="sura" class="opciones">SURA EPS</option>
+                    <option value="saludcoop" class="opciones">SALUD COOP</option>
+                    <option value="coomeva" class="opciones">COOMEVA</option>
+                    <option value="sanitas" class="opciones">SANITAS</option>
+                    <option value="nuevaeps" class="opciones">NUEVA EPS</option>
+                </select>
+            </div>
+            <div class="campos-30">                
+                <h3>Email</h3>
+                <input class="campos" type="email" id="email" name="email" required>
+            </div>
+            <div class="campos-30">
+                <h3>Teléfono</h3>
+                <input class="campos" type="text" id="tel" name="tel">
+            </div>
+            <div class="campos-30">
+                <h3>Dirección</h3>
+                <input class="campos" type="text" id="dir" name="dir">
+            </div>
+            <div class="campos-30">
+                <h3>Ciudad de residencia</h3>
+                <input class="campos" type="text" id="ciudad" name="ciudad">
+            </div>
+            <div class="campos-30">
+                <h3>Contraseña</h3>
+                <input class="campos" type="password" id="contrasena" name="contrasena" required>
+            </div>
+            <div class="politicas">
+                <label><input type="checkbox" id="politicas" required>  He leido y acepto la <a href="/politica-privacidad">Política de servicios</a> </label>
+            </div>           
+            
+            <input class="boton__registro"type="submit" value="Regístrate">
+            <br>           
+            <p class="advertencias" id="advertencias"></p>
+    </div>
+    <script src="{{ url_for('static', filename='js/logica.js') }}"></script>
+</body>
+</html>

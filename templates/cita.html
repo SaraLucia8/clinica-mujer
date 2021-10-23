@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cita {{ data.cita_id }}</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/paciente" class="menulink"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menuselect"><span>Citas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/roles" class="menulink"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <div class="perfil">
+                <div>
+                    <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
+                    <span class="roluser">Admin</span>
+                </div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
+            </div> 
+        </div>
+        <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
+            <!-- <h1 class="titulo"><span style="color:#F72B50">Bienvenido a la </span><span style="color:#450B5A">Clinica de la Mujer</span></h1> -->
+            <div class="infocita3">
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span style="color:#450B5A">Fecha: </span><span>{{ data.fecha }}</span>
+                </div>
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/username_100px.png')}}" class="calendarwatch" alt=""><span style="color:#450B5A">Paciente: </span>
+                    <span>
+                        {% for t in listapacientes %}{% if t.cedula == data.paciente_id %}<span>{{ t.nombre }} {{ t.apellido }}</span>{% endif %}{% endfor %} 
+                    </span>
+                </div>
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span style="color:#450B5A">Medico: </span>
+                    <span>
+                        {% for t in listamedicos %}{% if t.cedula == data.medico_id %}<span>{{ t.nombre }} {{ t.apellido }}</span>{% endif %}{% endfor %}
+                    </span>
+                </div>
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/tag_window_100px.png')}}" class="calendarwatch" alt=""><span style="color:#450B5A">Motivo: </span><span>{{ data.motivo }}</span>
+                </div>
+                <div class="contenedordbtn">
+                    <a href="/listado-citas/{{ data.cita_id }}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                    <a href="/listado-citas/{{ data.cita_id }}/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
+                </div>
+            </div>
+            <img src="{{ url_for('static', filename='images/medico.jpg')}}" alt="" class="imgcita">
+        </div>
+    </main> 
+</body>
+</html>

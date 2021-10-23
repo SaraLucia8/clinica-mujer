@@ -1,0 +1,7 @@
+.img-container{
+    width: 357px;
+    height: 490px;
+    background-image: url(../img/diagnostico.jpg);
+    border-radius: 27px;
+    margin-top: 20px
+}

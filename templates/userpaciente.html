@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil del paciente</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/users.css')}}">
+</head>
+<body>
+    <header class="header">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/paciente" class="menuselect"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menulink"><span>Citas pendientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/roles" class="menulink"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <a href="/registro" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}" class="profile" alt="+"><span>Nuevo paciente</span></a>
+            <div>
+                <input type="search" class="search" placeholder="Buscar paciente">
+                <div class="perfil">
+                    <div>
+                        <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
+                        <span class="roluser">Admin</span>
+                    </div>
+                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
+                </div> 
+            </div>
+        </div>
+        <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
+            <div class="pacienteperfil">
+                <div class="perfilcitas">
+                    <div class="contenedorperfil">
+                        <div class="userperf">
+                            <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="userper" alt="">
+                            <h1 class="username">{{data.nombre}} {{data.apellidos}}</h1>
+                        </div>
+                        <div class="userinfo">
+                            <h2 class="infotitle">Informacion basica</h2><br>
+                            <span style="color:#450B5A">Fecha de Nacimiento </span><span style="color:#000000">{{data.nacimiento}}</span> <br><br>
+                            <span style="color:#450B5A">EPS </span><span style="color:#000000">{{data.eps}}</span> <br><br>
+                            <span style="color:#450B5A">Email </span><span style="color:#000000">{{data.email}}</span><br><br>
+                            <span style="color:#450B5A">Telefono </span><span style="color:#000000">{{data.telefono}}</span> <br><br>
+                            <span style="color:#450B5A">Direcccion </span><span style="color:#000000">{{data.dir}}</span> <br><br>
+                            <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">{{data.ciudad}}</span> <br><br>
+                        </div>
+                    </div>
+                    <div class="contenedorcitas">
+                        <h2 class="infotitle">Citas pendientes</h1>
+                            {% for c in cita %}
+                            <div class="infocita">
+                                <div class="diahora">
+                                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>{{ c.fecha }}</span>
+                                </div>
+                                <div class="diahora">
+                                    <img src="{{ url_for('static', filename='images/username_100px.png')}}" class="calendarwatch" alt="">
+                                    {% for l in listamedicos %}
+                                        {% if c.medico_id == l.cedula %}
+                                            <span>{{l.nombre}} {{l.apellido}}</span>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="contenedortbtn">
+                                    <a href="/listado-citas/{{ c.cita_id }}"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
+                                    <a href="/listado-citas/{{ c.cita_id }}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                                    <a href="/listado-citas/{{ c.cita_id }}/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a> 
+                                </div>
+                            </div>
+                            {% endfor %}
+                        <hr color="#F72B50" size="0.5rem">
+                    </div>
+                </div>
+                <div class="userhistoria">
+                    <h2 class="infotitle">Historia clinica</h2><br>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales, libero et semper porta, augue diam vestibulum quam, et egestas eros quam pulvinar augue. Mauris ac mi sed lacus tempor tincidunt condimentum viverra nibh. Duis finibus ipsum eu sollicitudin laoreet. Sed non cursus neque. Nunc dignissim elit interdum urna feugiat hendrerit. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur in dui lacus. Fusce sed mattis tortor. Nullam vitae elit et risus iaculis hendrerit. Nam at est et eros vulputate rhoncus vel sit amet lorem. Mauris et sapien efficitur, consequat dui a, hendrerit mauris. Nunc at facilisis est, varius hendrerit sapien. Nulla a nunc quis orci consectetur egestas at eu nisl. Ut egestas ligula ipsum, vitae posuere erat aliquet cursus. Nulla eleifend mollis eleifend.</p>
+                    <p>Suspendisse ultricies fermentum commodo. Vestibulum tempus, dui rhoncus mattis aliquet, tellus mauris venenatis quam, nec scelerisque purus dui sit amet erat. Mauris iaculis molestie pretium. Sed ut nibh elit. Sed ultricies iaculis ipsum, id commodo neque sodales eget. In mauris tellus, viverra in quam convallis, gravida imperdiet sem. Nunc ac fringilla lorem, non efficitur massa. Nullam varius sit amet libero sed sollicitudin. Praesent faucibus eros vitae ipsum tempor, eget ultricies orci volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus lectus eu augue mattis porta. Nam quis sapien pretium, malesuada neque in, euismod urna. Fusce condimentum pulvinar orci, vitae pulvinar enim molestie non. Maecenas eget faucibus sapien. Nunc eget orci sit amet nibh vehicula laoreet eu non risus.</p>
+                    <p>Praesent volutpat arcu quis turpis fringilla tempus vel in ante. Fusce ullamcorper cursus arcu, vitae imperdiet sapien congue ut. Mauris luctus vehicula magna, quis gravida massa fringilla non. Pellentesque euismod dapibus ante ac tristique. Nunc commodo, dui in tincidunt pellentesque, purus justo dignissim magna, in scelerisque diam sem nec est. In eget turpis risus. Mauris sed magna elementum leo tristique tincidunt ac sit amet libero.</p>
+                    <div class="contenedordbtn">
+                        <a href="/historia-clinica/paciente/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                        <a href="/historia-clinica/paciente/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                    </div>
+                </div>
+            </div>
+    </main> 
+</body>
+</html>

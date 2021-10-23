@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinica de la Mujer</title>
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo-login.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor__login">
+        <div class="contenedor__banner">            
+            <img src="{{ url_for('static', filename='images/icono.png')}}" alt="Banner" width="70px" height="90px">
+            <h2>Clinica de <br> La Mujer</h2>
+        </div>
+
+        <form class="formulario__login" name="formulario" method="post" action=''>
+            <h3>Documento de Identidad</h3>
+            <input class="campos" type="text" name="cedula" required>
+            <br>
+            <br>
+            <h3>Contraseña</h3>
+            <input class="campos" type="password" name="contrasena" required>
+            <br>
+            <input class="boton__iniciar"type="submit" value="Iniciar Sesión" action="/dashboard/hola">
+            <br>
+            <div class="div__registro">                
+                <a class="registro" href="/registro"> ¿Eres Nuevo? <br>Registrate</a>
+            </div>
+
+        </form>
+
+       
+    </div>
+    
+</body>
+</html>

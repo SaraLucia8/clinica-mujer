@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo-contacto.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+    <title>Contactanos</title>
+</head>
+<body>
+    <div class="contenedor__contacto">
+        <div class="contenedor__banner">            
+            <img src="{{ url_for('static', filename='images/icono.png')}}" alt="Banner" width="70px" height="90px">
+            <h2>Clinica de <br> La Mujer</h2>
+            
+        </div>
+        <h2 class="subtitulo">Contacto</h2>
+
+        <form class="formulario__contacto" name="formulario" method="post">
+            
+            <h3>Nombre</h3>
+            <input class="campos" type="text" name="usuario" required>
+            <br>
+            <br>
+            <h3>Correo</h3>
+            <input class="campos" type="text" name="correo" required>
+            <br>
+            <br>
+            <h3>Telefono</h3>
+            <input class="campos" type="text" name="telefono" >
+            <br>
+            <br>
+             <h3>Mensaje</h3>
+            <textarea class="campo-mensaje" name="mensaje" id="" ></textarea>
+            <br>
+            <br>
+            <input class="boton__enviar"type="submit" value="Enviar">
+            <br>
+          
+        </form>       
+    </div>
+    
+</body>
+</html>

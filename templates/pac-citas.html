@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis citas</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/mis-citas" class="menuselect"><span>Mis citas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/mi-historia-clinica" class="menulink"><span>Mi historia clinica</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <a href="/mis-citas/agendar" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}"  class="profile" alt=""><span>Agendar cita</span></a>
+            <div class="perfil">
+                <div>
+                    <span class="nameuser">{{ row.nombre }} {{ row.apellido }}</span><br>
+                    <span class="roluser">Paciente</span>
+                </div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
+            </div> 
+        </div>
+        <div class="cuerpo">
+            <h1 class="titulo"><span style="color:#F72B50">Citas previas</span></h1>
+            <div class="infocita2">
+                <div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Camila Gil</span>
+                    </div>
+                </div>
+                <div class="btncalificacion">
+                    <a href="/mis-citas/calificar"><img src="{{ url_for('static', filename='images/rating_circled_purple_100px.png')}}" class="btned" alt=""><span>Calificar cita</span></a>
+                </div>
+            </div> 
+            <h1 class="titulo"><span style="color:#F72B50">Citas pendientes</span></h1>
+            <div class="infocita2">
+                <div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
+                    </div>
+                </div>
+                <div class="contenedortbtn2">
+                    <a href="/mis-citas/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                    <a href="/mis-citas/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                </div>
+            </div>
+            <div class="infocita2">
+                <div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>Viernes, 1 de octubre de 2021</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/stopwatch_100px.png')}}" class="calendarwatch" alt=""><span>04:00pm</span>
+                    </div>
+                    <div class="diahora">
+                        <img src="{{ url_for('static', filename='images/medical_doctor_100px.png')}}" class="calendarwatch" alt=""><span>Dra. Camila Gil</span>
+                    </div>
+                </div>
+                <div class="contenedortbtn2">
+                    <a href="/mis-citas/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                    <a href="/mis-citas/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </main> 
+</body>
+</html>

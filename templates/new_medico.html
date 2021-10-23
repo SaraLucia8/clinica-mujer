@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/estilo-registro.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ropa+Sans&display=swap" rel="stylesheet">
+    <title>Registro</title>
+</head>
+<body>
+    <div class="contenedor__registro">
+        <div class="contenedor__banner">            
+            <img src="{{ url_for('static', filename='images/icono.png')}}" alt="Banner" width="70px" height="90px">
+            <h2>Clínica de <br> La Mujer</h2>
+           
+        </div>
+            <div class="bienvenida">
+                <h3>Registro de personal médico</h3>
+            </div>            
+        <form class="formulario__registro" name="formulario-medico" method="post">
+            <div class="campos-30">
+                <h3>Número de identificación</h3>
+                <input class="campos" type="text" name="cedula" required>
+            </div>
+            <div class="campos-30">
+                <h3>Nombre(s)</h3>
+                <input class="campos" type="text" name="nombre" required>
+            </div>
+            <div class="campos-30">
+                <h3>Apellido(s)</h3>
+                <input class="campos" type="text" name="apellido" required>
+            </div>
+            <div class="campos-30">
+                <h3>Fecha de Nacimiento</h3>
+                <input class="campos" type="date" name="nacimiento" required>
+            </div>
+            <div class="campos-30">
+                <h3>Especialidad</h3>
+                <select name="especialidad" id="especialidad" class="campo-eps">
+                    <option selected="general" value="epss">Medico General</option>
+                    <option value="pediatra" class="opciones">Pediatra</option>
+                    <option value="ortopedista" class="opciones">Ortopedista</option>
+                    <option value="otros" class="opciones">Otros</option>
+
+                </select>
+            </div>
+            <div class="campos-30">                
+                <h3>Email</h3>
+                <input class="campos" type="email" name="email" required>
+            </div>
+            <div class="campos-30">
+                <h3>Teléfono</h3>
+                <input class="campos" type="text" name="tel">
+            </div>
+            <div class="campos-30">
+                <h3>Dirección</h3>
+                <input class="campos" type="text" name="dir">
+            </div>
+            <div class="campos-30">
+                <h3>Ciudad de residencia</h3>
+                <input class="campos" type="text" name="ciudad">
+            </div>
+            <div class="campos-30">
+                <h3>Contraseña</h3>
+                <input class="campos" type="password" name="contrasena" required>
+            </div>
+                    
+            
+            <input class="boton__registro"type="submit" value="Registro">
+            <br>           
+    </div>
+    
+</body>
+</html>

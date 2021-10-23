@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/agenda/{{row ['cedula']}}" class="menulink"><span>Agenda</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/medico/historia-clinica/{{row ['cedula']}}" class="menulink"><span>Historias Clinicas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <input type="search" class="search" placeholder="Buscar paciente">
+            <div class="perfil">
+                <div>
+                    <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
+                    <span class="roluser">Medico</span>
+                </div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
+            </div> 
+        </div>
+        <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
+            <h1 class="titulo"><span style="color:#F72B50">Bienvenido a la </span><span style="color:#450B5A">Clinica de la Mujer</span></h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p>
+            <img src="{{ url_for('static', filename='images/background.jpg')}}" class="background" alt="">
+        </div>
+    </main> 
+</body>
+</html>

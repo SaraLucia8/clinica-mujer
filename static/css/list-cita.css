@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Average+Sans&family=Ropa+Sans&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.btned {
+    width: 2rem;
+}
+
+body {
+    display: flex;
+}
+
+.calendarwatch {
+    height: 2rem;
+}
+
+.campo-eps {
+    height: 2.5rem;
+    margin-top: 2px;
+    background: #F72B50;
+    opacity: .4;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+}
+
+.contenedortbtn {
+    display: flex;
+    justify-content: space-between;
+    width: 8rem;
+    padding-top: 0.5rem;
+    margin: auto;
+}
+
+.cuerpo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    justify-content:space-between;
+}
+
+.diahora {
+    display: flex;
+    padding-bottom: 0.4rem;
+    width: 100%;
+    vertical-align:middle;
+}
+
+.diahora span {
+    margin-left: 0.5rem;
+}
+
+.flecha{
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.header {
+    margin:0;
+    display: block;
+    width: 18rem;
+    height: 100vh;
+    justify-content: center;
+}
+
+.infocita {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 0.1rem solid #450B5A;
+    border-radius: 1.6875rem;
+    padding: 1.2rem;
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.1rem;
+    width: 45%;
+    margin-bottom: 1rem;
+}
+
+.logo{
+    display: block;
+    height: 4rem;
+    margin: auto;
+    padding: 1rem;
+}
+
+.logout {
+    height: 2rem;
+    margin-left: 2rem;
+}
+
+.main {
+    width: calc(100% - 18rem);
+    padding: 1.8rem 4rem;
+    border-left: 0.1rem solid #F72B50;
+}
+
+.menu {
+    font-family: 'Average Sans', sans-serif;
+    list-style: none;
+    color: black;
+}
+
+.menulink{
+    display: inline-flex;
+    font-size: 1.2rem;
+    width: 14rem;
+    height: 1.5rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.menulink:hover{
+    background-color: #F72B50;
+    color: white;
+}
+
+.menuselect{
+    display: inline-flex;
+    font-size: 1.2rem;
+    width: 14rem;
+    height: 1.5rem;
+    padding: 1.5rem 2rem;
+    text-decoration: none;
+    color: black;
+    background-color: #F72B50;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.nameuser{
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 1.2rem;
+    color: #F72B50;
+}
+
+.newuser {
+    display: flex;
+    width: 10rem;
+    background: #F72B50;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Average Sans', sans-serif;
+    border-radius: 1.6875rem;
+    align-items: center;
+    text-decoration: none;
+}
+
+.perfil {
+    display: inline-flex;
+    align-items: center;
+    text-align: right;
+    margin-left: 2rem;
+    justify-content: flex-end;
+}
+
+.profile {
+    height: 2.5rem;
+    margin-left: 0.5rem;
+}
+
+.roluser{
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 0.9rem;
+}
+
+.search {
+    width: 16.75rem;
+    padding: 1rem;
+    background: #FEEAED;
+    border: none;
+    font-size: 0.8rem;
+    color: black;
+    border-radius: 1.6875rem;
+    outline: none;
+}
+
+.searchuser {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.triangulo {
+    height: 0.7rem;
+    margin-left: 0.33rem;
+    transform: rotate(90deg);
+}
+
+.titulo {
+    font-size: 2rem;
+    width: 100%;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 1rem;
+}
