@@ -46,7 +46,7 @@ class citas(db.Model):
     hora_atencion = db.Column(db.String)
     sintomas = db.Column(db.String)
     diagnostico = db.Column(db.String)
-    recomendaciones = db.Column(db.String)
+    anotaciones = db.Column(db.String)
     calificacion = db.Column(db.Integer)
     calificacion_obs = db.Column(db.String)
 
@@ -337,7 +337,7 @@ def view_paciente(user):
         paciente = users.query.filter_by(cedula=user).first()
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
         medicos = users.query.filter_by(rol='medico')
-        citass = citas.query.filter_by(paciente_id=int(user)).all()
+        citass = citas.query.filter_by(paciente_id=user).all()
         return render('userpaciente.html', data=paciente, row=usuario, listamedicos=medicos,  cita=citass)
     else:
         return render('acceso-denegado.html')   

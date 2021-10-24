@@ -41,7 +41,7 @@
                     <div class="contenedorperfil">
                         <div class="userperf">
                             <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="userper" alt="">
-                            <h1 class="username">{{data.nombre}} {{data.apellidos}}</h1>
+                            <h1 class="username">{{data.nombre}} {{data.apellido}}</h1>
                         </div>
                         <div class="userinfo">
                             <h2 class="infotitle">Informacion basica</h2><br>
@@ -51,6 +51,10 @@
                             <span style="color:#450B5A">Telefono </span><span style="color:#000000">{{data.telefono}}</span> <br><br>
                             <span style="color:#450B5A">Direcccion </span><span style="color:#000000">{{data.dir}}</span> <br><br>
                             <span style="color:#450B5A">Ciudad de residencia </span><span style="color:#000000">{{data.ciudad}}</span> <br><br>
+                            <div class="contenedordbtn">
+                                <a href="/paciente/{{data.cedula}}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                                <a href="/paciente/{{data.cedula}}/editar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                            </div>
                         </div>
                     </div>
                     <div class="contenedorcitas">
@@ -80,13 +84,30 @@
                 </div>
                 <div class="userhistoria">
                     <h2 class="infotitle">Historia clinica</h2><br>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sodales, libero et semper porta, augue diam vestibulum quam, et egestas eros quam pulvinar augue. Mauris ac mi sed lacus tempor tincidunt condimentum viverra nibh. Duis finibus ipsum eu sollicitudin laoreet. Sed non cursus neque. Nunc dignissim elit interdum urna feugiat hendrerit. Nulla facilisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur in dui lacus. Fusce sed mattis tortor. Nullam vitae elit et risus iaculis hendrerit. Nam at est et eros vulputate rhoncus vel sit amet lorem. Mauris et sapien efficitur, consequat dui a, hendrerit mauris. Nunc at facilisis est, varius hendrerit sapien. Nulla a nunc quis orci consectetur egestas at eu nisl. Ut egestas ligula ipsum, vitae posuere erat aliquet cursus. Nulla eleifend mollis eleifend.</p>
-                    <p>Suspendisse ultricies fermentum commodo. Vestibulum tempus, dui rhoncus mattis aliquet, tellus mauris venenatis quam, nec scelerisque purus dui sit amet erat. Mauris iaculis molestie pretium. Sed ut nibh elit. Sed ultricies iaculis ipsum, id commodo neque sodales eget. In mauris tellus, viverra in quam convallis, gravida imperdiet sem. Nunc ac fringilla lorem, non efficitur massa. Nullam varius sit amet libero sed sollicitudin. Praesent faucibus eros vitae ipsum tempor, eget ultricies orci volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc cursus lectus eu augue mattis porta. Nam quis sapien pretium, malesuada neque in, euismod urna. Fusce condimentum pulvinar orci, vitae pulvinar enim molestie non. Maecenas eget faucibus sapien. Nunc eget orci sit amet nibh vehicula laoreet eu non risus.</p>
-                    <p>Praesent volutpat arcu quis turpis fringilla tempus vel in ante. Fusce ullamcorper cursus arcu, vitae imperdiet sapien congue ut. Mauris luctus vehicula magna, quis gravida massa fringilla non. Pellentesque euismod dapibus ante ac tristique. Nunc commodo, dui in tincidunt pellentesque, purus justo dignissim magna, in scelerisque diam sem nec est. In eget turpis risus. Mauris sed magna elementum leo tristique tincidunt ac sit amet libero.</p>
-                    <div class="contenedordbtn">
-                        <a href="/historia-clinica/paciente/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                        <a href="/historia-clinica/paciente/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                    {% for c in cita %}
+                    {% if c.estado == 1%}
+                    <div class="detallehistoria">
+                        <span style="color:#450B5A">Fecha </span><span>{{c.fecha}}</span> <br>
+                        <span style="color:#450B5A">Hora de atencion </span><span>{{c.hora_atencion}}</span> <br>
+                        <span style="color:#450B5A">Medico </span>
+                        <span>
+                            {% for l in listamedicos %}
+                            {% if c.medico_id == l.cedula %}
+                                <span>{{l.nombre}} {{l.apellido}}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </span> <br>
+                        <span style="color:#450B5A">Motivo </span><span>{{c.motivo}}</span> <br>
+                        <span style="color:#450B5A">Sintomas </span><span>{{c.sintomas}}</span> <br>
+                        <span style="color:#450B5A">Diagnostico </span><span>{{c.diagnostico}}</span> <br>
+                        <span style="color:#450B5A">Anotaciones </span><span>{{c.anotaciones}}</span>
+                        <div class="contenedordbtn">
+                            <a href="/historia-clinica/paciente/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                            <a href="/historia-clinica/paciente/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                        </div>
                     </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
     </main> 

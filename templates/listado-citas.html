@@ -12,13 +12,13 @@
 
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
         <nav>
             <ul class="menu">
-                <li class="menuitems"><a href="medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
-                <li class="menuitems"><a href="paciente" class="menulink"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
-                <li class="menuitems"><a href="listado-citas" class="menuselect"><span>Citas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
-                <li class="menuitems"><a href="roles" class="menulink"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/paciente" class="menulink"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menuselect"><span>Citas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/roles" class="menulink"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
             </ul>
         </nav>
     </header>

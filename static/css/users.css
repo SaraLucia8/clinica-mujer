@@ -73,6 +73,11 @@ body {
     align-items: center;
 }
 
+.detallehistoria span{
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.1rem;
+}
+
 .diahora span {
     margin-left: 0.5rem;
 }
