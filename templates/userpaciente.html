@@ -102,10 +102,10 @@
                         <span style="color:#450B5A">Diagnostico </span><span>{{c.diagnostico}}</span> <br>
                         <span style="color:#450B5A">Anotaciones </span><span>{{c.anotaciones}}</span>
                         <div class="contenedordbtn">
-                            <a href="/historia-clinica/paciente/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
-                            <a href="/historia-clinica/paciente/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
-                        </div>
-                    </div>
+                            <a href="/historia-clinica/{{ c.cita_id }}/editar"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                            <a href="/historia-clinica/{{ c.cita_id }}/eliminar"><img src="{{ url_for('static', filename='images/delete_100px.png')}}" class="btned" alt=""></a>
+                        </div> 
+                    </div> <br>
                     {% endif %}
                     {% endfor %}
                 </div>

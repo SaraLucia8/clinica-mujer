@@ -241,23 +241,32 @@ def delete_medico(user):
         return render('acceso-denegado.html')
         
 #Historia clinica
-@app.route('/historia-clinica', methods=['GET'])
-def historia():
+@app.route('/historia-clinica/<cita>/editar', methods=['GET', 'POST'])
+def edit_historia(cita):
     if 'usuarioIngresado' in session:
-        return render('historia-clinica.html')
+        citass = citas.query.filter_by(cita_id=cita).first()
+        medicos = users.query.filter_by(rol='medico')
+        pacientes = users.query.filter_by(rol='paciente')
+        if request.method == 'POST':
+            citass.motivo=request.form['motivo']
+            citass.hora_atencion=request.form['hora_atencion']
+            citass.sintomas=request.form['sintomas']
+            citass.diagnostico=request.form['diagnostico']
+            citass.anotaciones=request.form['anotaciones']
+
+            db.session.commit()
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('edithistoria.html', row=usuario, data=citass, listamedicos=medicos, listapacientes=pacientes)
     else:
         return render('acceso-denegado.html')
     
-@app.route('/historia-clinica/paciente/editar', methods=['GET', 'POST'])
-def edit_historia():
+@app.route('/historia-clinica/<cita>/eliminar', methods=['GET', 'POST'])
+def delete_historia(cita):
     if 'usuarioIngresado' in session:
-        return render('edithistoria.html')
-    else:
-        return render('acceso-denegado.html')
-    
-@app.route('/historia-clinica/paciente/eliminar', methods=['GET', 'POST'])
-def delete_historia():
-    if 'usuarioIngresado' in session:
+        citass = citas.query.filter_by(cita_id=cita).first()
+        citass.estado = 0
+
+        db.session.commit()
         return render('deletehistoria.html')
     else:
         return render('acceso-denegado.html')
