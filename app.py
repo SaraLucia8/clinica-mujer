@@ -50,6 +50,36 @@ class citas(db.Model):
     calificacion = db.Column(db.Integer)
     calificacion_obs = db.Column(db.String)
 
+class cli_rol(db.Model):
+    __tablename__   = 'Cli_rol'
+    id_rol  = db.Column(db.String,  primary_key=True)
+    nom_rol = db.Column(db.String)
+    #users = db.relationship('users', backref=db.backref('usuarios_per', lazy=True))
+
+class permisos_rol(db.Model):
+    __tablename__   = 'permisos'
+    rol        = db.Column(db.String, primary_key=True )
+    med_cre    = db.Column(db.String)
+    med_con    = db.Column(db.String)
+    med_edi    = db.Column(db.String)
+    med_eli    = db.Column(db.String)
+    pac_cre    = db.Column(db.String)
+    pac_con    = db.Column(db.String)
+    pac_edi    = db.Column(db.String)
+    pac_eli    = db.Column(db.String)
+    cita_cre   = db.Column(db.String)
+    cita_con   = db.Column(db.String)
+    cita_edi   = db.Column(db.String)
+    cita_eli   = db.Column(db.String)
+    cal_cre    = db.Column(db.String)
+    cal_con    = db.Column(db.String)
+    cal_edi    = db.Column(db.String)
+    cal_eli    = db.Column(db.String)
+    com_cre    = db.Column(db.String)
+    com_con    = db.Column(db.String)
+    com_edi    = db.Column(db.String)
+    com_eli    = db.Column(db.String)
+
 @app.route('/', methods=['GET'])
 def index():
     return render('index.html')
@@ -253,10 +283,6 @@ def newcita():
             fecha = request.form['citafecha']
             motivo = request.form['citamotivo']
             estado = 1
-            # var.medico_id = request.form['citamedico']
-            # var.paciente_id = request.form['citapaciente']
-            # var.fecha = request.form['fecha']
-            # var.motivo = request.form['motivo']
             
             cita = citas(medico_id=medico_id, paciente_id=paciente_id, fecha=fecha, motivo=motivo, estado=estado)
             db.session.add(cita)
@@ -377,20 +403,24 @@ def delete_paciente(user):
         return render('acceso-denegado.html') 
     
 #Roles y permisos 
-@app.route('/roles', methods=['GET'])
-def roles():
+@app.route('/roles', methods=['GET','POST'])
+def listadorol():
     if 'usuarioIngresado' in session:
+        roles = cli_rol.query.filter_by()
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
-        return render('roles.html', row=usuario)
+        return render('roles.html', listaroles=roles, row=usuario)
     else:
-        return render('acceso-denegado.html') 
+        return render('acceso-denegado.html')
 
-@app.route('/roles/new', methods=['GET', 'POST'])
-def new_rol():
+@app.route('/roles/<rol_seleccionado>', methods=['GET','POST'])
+def listado_roles(rol_seleccionado):
     if 'usuarioIngresado' in session:
-        return render('new_rol.html')
+        roles    = cli_rol.query.filter_by()
+        permisos = permisos_rol.query.filter_by(rol=rol_seleccionado)
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('roles.html', listaroles=roles, listapermisos=permisos,row=usuario)
     else:
-        return render('acceso-denegado.html') 
+        return render('acceso-denegado.html')
     
 # ************MEDICO************
 @app.route('/dashboard-medico', methods=['GET'])

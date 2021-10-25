@@ -1,257 +1,114 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Roles y Permisos</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/images.png')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/roles.css')}}">
+    <title>Lista de roles</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/list_roles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylelist.css')}}">
 </head>
 
 <body>
     <header class="header">
-        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <a href="/dashboard" type="button" class="btn"><img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer"></a>
         <nav>
             <ul class="menu">
                 <li class="menuitems"><a href="/medico" class="menulink"><span>Medicos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
                 <li class="menuitems"><a href="/paciente" class="menulink"><span>Pacientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
-                <li class="menuitems"><a href="/listado-citas" class="menulink"><span>Citas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/listado-citas" class="menulink"><span>Citas pendientes</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
                 <li class="menuitems"><a href="/roles" class="menuselect"><span>Roles y permisos</span><img src="{{ url_for('static', filename='images/triangulo.png')}}"  class="flecha" alt=""></a></li>
             </ul>
         </nav>
     </header>
+
     <main class="main">
         <div class="searchuser">
+            <select name="rolselect" onchange="window.location.href=this.options[this.options.selectedIndex].value" class="campo-eps" >
+                <option selected="selected disabled">Seleccionar el Rol</option>
+                {% for data in listaroles %}
+                <option value="/roles/{{ data.id_rol }}" class="opciones">{{data.nom_rol}} </option>
+                codrol = data.id_rol
+                {% endfor %}
+            </select>            
             <div>
-                <div class="perfil">
-                    <div>
-                        <span class="nameuser">{{ row.nombre }} {{ row.apellido }}</span><br>
-                        <span class="roluser">Admin</span>
-                    </div>
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
-                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
-                </div> 
+            <div class="perfil">
+                <div><span class="nameuser">{{ row.nombre }} {{ row.apellido }}</span><br><span class="roluser">Admin</span></div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
             </div>
+            </div> 
         </div>
-        <div class="cuerpo">
-            <!--En este espacio va la informacion especifica de cada pagina -->
-            <div class="campos-50">
-                <select name="role" id="role" class="campo-role">
-                    <option value="roles" selected="selected disabled" >Seleccione el Rol</option>
-                    <option value="Medico"   class="opciones">Médico</option>
-                    <option value="Paciente" class="opciones">Paciente</option>
-                    <option value="Admin"    class="opciones">Administrador</option>
-                </select>
-            </div>
-            <div class="contenedor_table">
-                <section class="u-section-3">
-                    <!--<div class="u-expanded-width u-table ">-->
-                    <div class="u-table">
-                        <table>
-                            <thead class="u-align-center  u-table-header-1">
-                                <tr style="height: 10px;">
-                                    <th class="title-tabla">Permisos</th>
-                                </tr>
-                            </thead>
-                        </table>
 
-                        <table class="nameactiv u-table-entity-1">
-                            <thead class="u-table-header-2">
-                                <tr style="height: 21px;width:30%">
-                                <th class="u-border-1 u-border-palette-5-light-1 u-red-10  ">Actividad</th>
-                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Crear</th>
-                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Consultar</th>
-                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Editar</th>
-                                <th class="u-align-center u-border-1 u-border-palette-5-light-1 u-pink-10  ">Eliminar</th>
-                                </tr>
-                            </thead>
-      
-                            <tbody class="u-align-center u-table-body">
+        <!-- {% for data in listanomrol %}
+            <span class="nameuser">{{ data ["nom_rol"] }}</span>
+            <input class="camposroles" type="text" name="nomrol" value="{{ data ["nom_rol"] }}" >
+        {% endfor %} -->
 
-                            <tr style="height: 30px; width:30%">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Usuario Medico</td>
-                                
-                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
+        <div class="u-tabla"> <br><br>
+            <table style = "width: 90%; border:none; align-items: center">
+                <thead class="u-align-center  u-table-header-1">
+                    <tr style="height: 10px; width: 200px;">
+                        <th class="title-tabla">Permisos</th>
+                    </tr>
+                </thead>
+            </table>
+            <table style = "width: 90%; border:none; align-items:center">   
+                <tbody>
+                    <tr style="text-align: center;">
+                        <td class="campo_act_tit">Actividad</td>
+                        <td class="campo_act_tit">Crear</td>
+                        <td class="campo_act_tit">Consultar</td>
+                        <td class="campo_act_tit">Editar   </td>
+                        <td class="campo_act_tit">Eliminar </td>
+                    </tr>
 
-                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
+                    {% for data in listapermisos %}
+                    <tr style="text-align: center;">
+                        <td class="camposactividad" style="text-align: left;">  Gestionar Médicos </td>
+                        <td><input class="camposroles" type="text" name="medcre" value="{{ data ["med_cre"] }}" id="medcre"></td>
+                        <td><input class="camposroles" type="text" name="medcon" value="{{ data ["med_con"] }}" id="medcon"></td>
+                        <td><input class="camposroles" type="text" name="mededi" value="{{ data ["med_edi"] }}" id="mededi"></td>
+                        <td><input class="camposroles" type="text" name="medeli" value="{{ data ["med_eli"] }}" id="medeli"></td>
+                    </tr>
 
-                                <td class="u-border-1 u-border-grey-25 u-table-cell-0"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr style="height: 30px;">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Usuario Paciente</td>
-                                
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                            </tr>
-        
-                            <tr style="height: 30px; width:30%">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Citas</td>
-        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                            </tr>
+                    <tr style="text-align: center;">    
+                        <td class="camposactividad" style="text-align: left;">  Gestionar Pacientes </td>
+                        <td><input class="camposroles" type="text" name="pacre" value="{{ data ["pac_cre"] }}" id="paccre"></td>
+                        <td><input class="camposroles" type="text" name="paccon" value="{{ data ["pac_con"] }}" id="paccon"></td>
+                        <td><input class="camposroles" type="text" name="pacedi" value="{{ data ["pac_edi"] }}" id="pacedi"></td>
+                        <td><input class="camposroles" type="text" name="paceli" value="{{ data ["pac_eli"] }}" id="paceli"></td>
+                    </tr>
                     
-                           <tr style="height: 30px;">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Calificaciones</td>
-                                
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                            </tr>
+                    <tr style="text-align: center;">    
+                        <td class="camposactividad" style="text-align: left;">  Gestionar Citas </td>
+                        <td><input class="camposroles" type="text" name="citacon" value="{{ data ["cita_cre"] }}" id="citacre"></td>
+                        <td><input class="camposroles" type="text" name="citacon" value="{{ data ["cita_con"] }}" id="citacon"></td>
+                        <td><input class="camposroles" type="text" name="citaedi" value="{{ data ["cita_edi"] }}" id="citaedi"></td>
+                        <td><input class="camposroles" type="text" name="citaeli" value="{{ data ["cita_eli"] }}" id="citaeli"></td>
+                    </tr>
 
-                            <tr style="height: 30px;">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell-0">Comentarios</td>
-                                
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
+                    <tr style="text-align: center;">    
+                        <td class="camposactividad" style="text-align: left;">  Gestionar Calificaciones</td>
+                        <td><input class="camposroles" type="text" name="calcon" value="{{ data ["cal_cre"] }}" id="calcre"></td>
+                        <td><input class="camposroles" type="text" name="calcon" value="{{ data ["cal_con"] }}" id="calcon"></td>
+                        <td><input class="camposroles" type="text" name="caledi" value="{{ data ["cal_edi"] }}" id="caledi"></td>
+                        <td><input class="camposroles" type="text" name="caleli" value="{{ data ["cal_eli"] }}" id="caleli"></td>
+                    </tr>
 
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                                
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                        
-                                <td class="u-border-1 u-border-grey-25"> 
-                                    <div class="margin-l-15 checkbox checkboxStyle-table checkColorGreenLight">
-                                        <input type="checkbox" class="tableid" name="tableid" id="tableid" class="click">
-                                        <label class="s18 text-normal"></label>
-                                    </div>
-                                </td>
-                            </tr>
-                    
-                            <tr style="height: 30px;">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                            </tr>          
-          
-                            <tr style="height: 30px;">
-                                <td class="u-align-left u-border-1 u-border-grey-25 u-table-cell"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                                <td class="u-border-1 u-border-grey-25"> </td>
-                            </tr>          
-                        </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
+                    <tr style="text-align: center;">    
+                        <td class="camposactividad" style="text-align: left;">  Gestionar Historia Clinica </td>
+                        <td><input class="camposroles" type="text" name="comcon" value="{{ data ["com_cre"] }}" id="comcre"></td>
+                        <td><input class="camposroles" type="text" name="comcon" value="{{ data ["com_con"] }}" id="comcon"></td>
+                        <td><input class="camposroles" type="text" name="comedi" value="{{ data ["com_edi"] }}" id="comedi"></td>
+                        <td><input class="camposroles" type="text" name="comeli" value="{{ data ["com_eli"] }}" id="comeli"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
+        
     </main>
 </body>
 </html>
