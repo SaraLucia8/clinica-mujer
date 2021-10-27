@@ -282,6 +282,13 @@ p {
     justify-content: flex-end;
 }
 
+.searchuser2 {
+    width: 100%;
+    display: flex;
+    vertical-align: middle;
+    justify-content: space-between;
+}
+
 .titulo {
     font-size: 2rem;
     width: 100%;

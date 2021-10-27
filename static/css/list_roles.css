@@ -34,7 +34,7 @@ body {
 }
 
 .campo-eps {
-    width: 100%;
+    width: 300px;
     height: 2.5rem;
     margin-top: 2px;
     background: #F72B50;
@@ -208,15 +208,6 @@ body {
     border-radius: 1.6875rem;
     align-items: center;
     text-decoration: none;
-}
-
-.perfil {
-    display: inline-flex;
-    align-items: center;
-    text-align: right;
-    margin-left: 2rem;
-    width: 10rem;
-    justify-content: flex-end;
 }
 
 .profile {

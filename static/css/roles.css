@@ -134,7 +134,7 @@ p {
     width: 100%;
     display: flex;
     vertical-align: middle;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 
 .titulo {

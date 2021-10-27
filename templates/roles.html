@@ -7,7 +7,7 @@
     <title>Lista de roles</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/list_roles.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stylelist.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
     </header>
 
     <main class="main">
-        <div class="searchuser">
+        <div class="searchuser2">
             <select name="rolselect" onchange="window.location.href=this.options[this.options.selectedIndex].value" class="campo-eps" >
                 <option selected="selected disabled">Seleccionar el Rol</option>
                 {% for data in listaroles %}
@@ -32,7 +32,6 @@
                 codrol = data.id_rol
                 {% endfor %}
             </select>            
-            <div>
             <div class="perfil">
                 <div><span class="nameuser">{{ row.nombre }} {{ row.apellido }}</span><br><span class="roluser">Admin</span></div>
                 <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">

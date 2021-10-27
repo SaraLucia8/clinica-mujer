@@ -200,6 +200,7 @@ body {
     border-radius: 1.6875rem;
     align-items: center;
     text-decoration: none;
+    margin-right: 2rem;
 }
 
 .roluser{
@@ -273,6 +274,12 @@ p {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    width: 100%;
+}
+.searchuser2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
 }
 
