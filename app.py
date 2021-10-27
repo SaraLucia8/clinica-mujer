@@ -456,7 +456,12 @@ def historia_medico(cedulam):
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
         pacientes = users.query.filter_by(rol='paciente')
         citass= citas.query.filter_by(medico_id=cedulam).all()
-        return render('med-historiaclinica.html', row=usuario, listacitas=citass, listapacientes=pacientes)
+        cedulap=[]
+        for c in citass:
+            cedulap.append(c.paciente_id)        
+        cedulaa = list(set(cedulap))
+        print(cedulaa)
+        return render('med-historiaclinica.html', row=usuario, listapacientes=pacientes, cedulaa=cedulaa)
     else:
         return render('acceso-denegado.html')
     
