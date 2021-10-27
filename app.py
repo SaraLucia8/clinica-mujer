@@ -489,11 +489,21 @@ def ver_historia_medico(cedulam, cedulap):
     else:
         return render('acceso-denegado.html')
     
-@app.route('/medico/historia-clinica/user/newcoment/<cedulap>', methods=['GET', 'POST'])
-def comentar_medico(cedulap):
+@app.route('/medico/historia-clinica/<cedulam>/newcoment/<cedulap>', methods=['GET', 'POST'])
+def comentar_citas_medico(cedulap, cedulam):
     if 'usuarioIngresado' in session:
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
-        citap= citas.query.filter_by(paciente_id=cedulap).first()
+        lcita = citas.query.filter_by(paciente_id=cedulap).all()
+        pacientes = users.query.filter_by(rol='paciente')
+        return render('med-citas-paciente.html',row=usuario, listapacientes=pacientes, listacitas=lcita, cedulam=cedulam)
+    else:
+        return render('acceso-denegado.html')
+
+@app.route('/medico/historia-clinica/<cedulam>/newcoment/<cedulap>/<cita>', methods=['GET', 'POST'])
+def comentar_medico(cedulap, cedulam, cita):
+    if 'usuarioIngresado' in session:
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        citap= citas.query.filter_by(cita_id=cita).first()
 
         if request.method == 'POST':
             citap.sintomas = request.form['sintomas']

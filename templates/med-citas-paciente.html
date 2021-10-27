@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icono.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css')}}">
+</head>
+<body>
+    <header class="header">
+        <img src="{{ url_for('static', filename='images/iconoclinica.png')}}" class="logo" alt="Clinica de la mujer">
+        <nav>
+            <ul class="menu">
+                <li class="menuitems"><a href="/agenda/{{row ['cedula']}}" class="menulink"><span>Agenda</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+                <li class="menuitems"><a href="/medico/historia-clinica/{{row ['cedula']}}" class="menuselect"><span>Historias Clinicas</span><img src="{{ url_for('static', filename='images/triangulo.png')}}" class="flecha" alt=""></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="main">
+        <div class="searchuser">
+            <div>
+                <div class="perfil">
+                    <div>
+                        <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>
+                        <span class="roluser">Medico</span>
+                    </div>
+                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="profile" alt="">
+                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
+                </div>
+            </div> 
+        </div>
+        <!--En este espacio va la informacion especifica de cada pagina -->
+        <div class="cuerpo">
+            <h1 class="titulo"><span style="color:#F72B50">Citas</span></h1>
+            {% for data in listacitas %}
+            <div class="infocita">
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/calendar_100px.png')}}" class="calendarwatch" alt=""><span>{{data.fecha}}</span>
+                </div>
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/username_100px.png')}}" class="calendarwatch" alt="">
+                    {% for t in listapacientes %}
+                        {% if t.cedula == data.paciente_id %}
+                            <span>{{ t.nombre }} {{ t.apellido }}</span>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="diahora">
+                    <img src="{{ url_for('static', filename='images/rating_circled_pink_100px.png')}}" class="calendarwatch" alt=""><span>{{data.motivo}}</span>
+                </div>
+                <div class="contenedordbtn"> 
+                    <a href="/medico/historia-clinica/{{cedulam}}/newcoment/{{data.paciente_id}}/{{data.cita_id}}"><img src="{{ url_for('static', filename='images/edit_100px.png')}}" class="btned" alt=""></a>
+                </div>
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </main> 
+</body>
+</html>
