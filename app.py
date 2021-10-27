@@ -464,6 +464,18 @@ def historia_medico(cedulam):
         return render('med-historiaclinica.html', row=usuario, listapacientes=pacientes, cedulaa=cedulaa)
     else:
         return render('acceso-denegado.html')
+
+@app.route('/medico/historia-clinica/<cedulam>/<cedulap>', methods=['GET', 'POST'])
+def ver_historia_medico(cedulam, cedulap):
+    if 'usuarioIngresado' in session:
+        paciente = users.query.filter_by(cedula=cedulap).first()
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        medicos = users.query.filter_by(rol='medico')
+        pacientes = users.query.filter_by(rol='paciente')
+        citass = citas.query.filter_by(paciente_id=cedulap).all()
+        return render('med-ver-historia.html', data=paciente, row=usuario, listamedicos=medicos,  cita=citass, cedulap=cedulap, listapacientes=pacientes)
+    else:
+        return render('acceso-denegado.html')
     
 @app.route('/medico/historia-clinica/user/newcoment/<cedulap>', methods=['GET', 'POST'])
 def comentar_medico(cedulap):

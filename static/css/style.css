@@ -66,12 +66,33 @@ body {
     margin: auto;
 }
 
+.contenedorbotones {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding-top: 0.5rem;
+}
+
+.contenedorbotones a{
+    margin-left: 2rem;
+}
+
+
 .cuerpo {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 3rem;
     justify-content:space-between;
+}
+
+.detallehistoria {
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-bottom: #F72B50 solid 0.1rem;
+    padding-bottom: 1rem;
 }
 
 .diahora {
