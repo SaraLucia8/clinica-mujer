@@ -18,8 +18,51 @@ body {
     display: flex;
 }
 
+.boton__registro{
+    height: 3rem;
+    width: 100%;
+    background: #F72B50;
+    color:white;
+    font-size:1rem;
+    border-radius: 20px;
+    border: none;
+    margin: auto;
+}
+
+.calendar{
+    width: 20%;
+    height: 2.5rem;
+    margin-top: 2px;
+    background: #F72B50;
+    opacity: .4;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    border-radius: 10px;
+    border: none;
+}
+
+
+.campo-eps {
+    width: 40%;
+    height: 2.5rem;
+    margin-top: 2px;
+    background: #F72B50;
+    opacity: .4;
+    color:white;
+    font-size:20px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+}
+
+.cedula{
+    width: 100%;text-align: center;
+}
+
 .cuerpo {
     margin-top: 3rem;
+    width: 100%;
 }
 
 .contenedor_user {
@@ -129,6 +172,13 @@ body {
     margin-left: 1rem;
 }
 
+.nombre_user2 {
+    font-family: 'Average Sans', sans-serif;
+    font-size: 1.2rem;
+    color: #000000;
+    margin-left: 1rem;
+}
+
 .nom_img {
     display: flex;
     align-items: center;
@@ -157,6 +207,46 @@ body {
     font-size: 0.9rem;
 }
 
+/* .textfield{
+    border-width:2px;
+    font-size: 1.1rem;
+    font-family: 'Average Sans', sans-serif;
+    text-align:justify;
+    padding:0.2rem 0.2rem;
+    display: inline-flex;
+    background-color: rgb(255, 255, 255);
+} */
+
+.form-edicion{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-edicion div{
+    display: flex;
+    width: 250px;
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 1.2rem;
+    color: #F72B50;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.textfield{
+    margin: 0.2rem 0;
+    width: 15rem;
+    padding: 1rem;
+    background: #FEEAED;
+    border: none;
+    font-size: 0.8rem;
+    color: black;
+    border-radius: 1.6875rem;
+    outline: none;
+}
+
 p {
     font-size: 1.1rem;
     font-family: 'Average Sans', sans-serif;
@@ -182,7 +272,14 @@ p {
 .searchuser {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.subtitulo {
+    font-size: 1rem;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 1rem;
 }
 
 .titulo {
