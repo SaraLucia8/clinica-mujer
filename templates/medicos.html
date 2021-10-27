@@ -26,7 +26,7 @@
         <div class="searchuser">
             <a href="/medico/new" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}"  class="profile" alt=""><span>Nuevo medico</span></a>
             <div>
-                <input type="search" class="search" placeholder="Buscar medico">
+                <input type="search" class="search" id="buscador" placeholder="Buscar medico">
                 <div class="perfil">
                     <div>
                         <span class="nameuser">{{row.nombre}} {{row.apellido}}</span><br>
@@ -41,10 +41,10 @@
             <!--En este espacio va la informacion especifica de cada pagina -->
             <h1 class="titulo"><span style="color:#F72B50">Medicos</span></h1>
             <div>
-                <ul>
+                <ul id=tabla>
                     {% for data in listamedicos %}
                         {% if data.estado == 1 %}             
-                        <div class="contenedor_user">
+                        <div class="contenedor_user" id=datos>
                             <div class="nom_img">
                                 <img src="{{ url_for('static', filename='images/test_account_100px.png')}}" class="imgp" alt="">
                                 <span class="nombre_user">{{data.nombre}} {{data.apellido}}</span>
