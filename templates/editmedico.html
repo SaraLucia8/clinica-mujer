@@ -39,19 +39,19 @@
         <div class="cuerpo">
             <!--En este espacio va la informacion especifica de cada pagina -->
             <h1 class="titulo"><span style="color:#F72B50">Edicion de medico: </span><span style="color:#450B5A">{{ data.nombre }} {{ data.apellido }}</span></h1>
-            <form action="/medico/{{ data.cedula }}/editar" method="POST"> 
-                <span>Cedula </span><span>{{ data.cedula }}</span> <br>
-                <span>Nombre </span><input class="textfield" type="text" name="nombre" value="{{ data.nombre }}"> <br>
-                <span>Apellido </span><input class="textfield" type="text" name="apellido" value="{{ data.apellido }}"> <br>
-                <span>Fecha de Nacimiento </span><input class="calendar" type="date" name="nacimiento" value="{{ data.nacimiento }}"> <br>
-                <span>Email </span><input class="textfield" type="text" name="email" value="{{ data.email }}"> <br>
-                <span>Telefono </span><input class="textfield" type="text" name="telefono" value="{{ data.telefono }}"> <br>
-                <span>Direccion </span><input class="textfield" type="text" name="dir" value="{{ data.dir }}"> <br>
-                <span>Ciudad de residencia </span><input class="textfield" type="text" name="ciudad" value="{{ data.ciudad }}"> <br>
-                <span>Contraseña </span><input class="textfield" type="text" name="password" value="{{ data.password }}"> <br>
-                <span>Especialidad </span><input class="textfield" type="text" name="especialidad" value="{{ data.especialidad }}"> <br>
+            <div><span>Cedula </span><span>{{ data.cedula }}</span></div>
+            <form action="/medico/{{ data.cedula }}/editar" method="POST" class="form-edicion">    
+                <div><span>Nombre </span><input class="textfield" type="text" name="nombre" value="{{ data.nombre }}"></div>
+                <div><span>Apellido </span><input class="textfield" type="text" name="apellido" value="{{ data.apellido }}"></div>
+                <div><span>Email </span><input class="textfield" type="text" name="email" value="{{ data.email }}"></div>
+                <div><span>Telefono </span><input class="textfield" type="text" name="telefono" value="{{ data.telefono }}"></div>
+                <div><span>Direccion </span><input class="textfield" type="text" name="dir" value="{{ data.dir }}"></div>
+                <div><span>Ciudad de residencia </span><input class="textfield" type="text" name="ciudad" value="{{ data.ciudad }}"></div>
+                <div><span>Contraseña </span><input class="textfield" type="text" name="password" value="{{ data.password }}"></div>
+                <div><span>Fecha de Nacimiento </span><input class="textfield" type="date" name="nacimiento" value="{{ data.nacimiento }}"></div>
+                <div><span>Especialidad </span><input class="textfield" type="text" name="especialidad" value="{{ data.especialidad }}"></div>
 
-                <input class="boton__registro" type="submit" value="Guardar cambios"> <br>
+                <div align='center'><input class="boton__registro" type="submit" value="Guardar cambios"></div>
             </form>
 
     </main>

@@ -20,18 +20,14 @@ body {
 
 .boton__registro{
     display:block;
-    width: 20%;
     height: 3rem;
-    margin-top: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 1rem;
+    width: 100%;
     background: #F72B50;
-    opacity: .7;
     color:white;
-    font-size:20px;
+    font-size:1rem;
     border-radius: 20px;
     border: none;
+    margin: auto;
 }
 
 .calendar{
@@ -63,6 +59,7 @@ body {
 
 .cuerpo {
     margin-top: 3rem;
+    width: 100%;
 }
 
 .contenedor_user {
@@ -217,13 +214,31 @@ body {
     background-color: rgb(255, 255, 255);
 } */
 
+.form-edicion{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.form-edicion div{
+    width: 250px;
+    font-family: 'Ropa Sans', sans-serif;
+    font-size: 1rem;
+    color: #F72B50;
+    align-items: center;
+}
+
 .textfield{
-width: 300px;
-height: 20px;
-padding: 5px;
-border-radius: 5px;
-background: #fcc;
-font-size: 0.9rem;
+    margin: 0.2rem 0;
+    width: 15rem;
+    padding: 1rem;
+    background: #FEEAED;
+    border: none;
+    font-size: 0.8rem;
+    color: black;
+    border-radius: 1.6875rem;
+    outline: none;
 }
 
 p {
