@@ -22,7 +22,13 @@
     </header>
     <main class="main">
         <div class="searchuser">
-            <input type="search" class="search" placeholder="Buscar medico o paciente">
+            <form action="/search", method="POST">
+                <div class="buscador">
+                    <input type="text"  placeholder="Buscar usuario" class="search" name="search">
+                    <button type="submit" class="btnsearch"><img src="{{ url_for('static', filename='images/search_100px.png')}}" alt=""></button>
+                </div>
+            </form>  
+            <!-- <input type="search" class="search" placeholder="Buscar medico o paciente"> -->
             <div class="perfil">
                 <div>
                     <span class="nameuser">{{ row ['nombre'] }} {{ row ['apellido'] }}</span><br>

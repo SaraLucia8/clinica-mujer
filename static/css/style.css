@@ -30,6 +30,26 @@
     margin: auto;
 }
 
+.btnsearch {
+    height: 1rem;
+    background: #FEEAED;
+    border: none;
+    outline: none;
+}
+
+.btnsearch img{
+    height: 2rem;
+    margin-top: -0.5rem;
+}
+
+.buscador {
+    display: flex;
+    padding: 1rem;
+    background-color: #FEEAED;
+    justify-content: space-between;
+    border-radius: 1.6875rem;
+}
+
 .btncalificacion a {
     display: flex;
     align-items: center;
@@ -287,7 +307,6 @@ p {
 
 .search {
     width: 16.75rem;
-    padding: 1rem;
     background: #FEEAED;
     border: none;
     font-size: 0.8rem;

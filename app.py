@@ -161,6 +161,18 @@ def dashboard():
     else:
         return render('acceso-denegado.html')
 
+@app.route('/search', methods=['GET', 'POST'])
+def buscar():
+    if 'usuarioIngresado' in session:
+        if request.method =='POST':
+            busqueda = str(request.form.get("search"))
+            usuarios = users.query.filter(users.cedula.like(busqueda))
+            listusu = usuarios.all()
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        return render('resultsearch.html', row=usuario, search=listusu)
+    else:
+        return render('acceso-denegado.html')
+
 #Medico
 @app.route('/medico', methods=['GET'])
 def medicouser():

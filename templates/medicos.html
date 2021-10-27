@@ -25,16 +25,13 @@
     <main class="main">
         <div class="searchuser2">
             <a href="/medico/new" class="newuser"><img src="{{ url_for('static', filename='images/plus_math_100px.png')}}"  class="profile" alt=""><span>Nuevo medico</span></a>
-            <div>
-                <input type="search" class="search" id="buscador" placeholder="Buscar medico">
-                <div class="perfil">
-                    <div>
-                        <span class="nameuser">{{row.nombre}} {{row.apellido}}</span><br>
-                        <span class="roluser">Admin</span>
-                    </div>
-                    <img src="{{ url_for('static', filename='images/test_account_100px.png')}}"  class="profile" alt="">
-                    <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
-                </div> 
+            <div class="perfil">
+                <div>
+                    <span class="nameuser">{{row.nombre}} {{row.apellido}}</span><br>
+                    <span class="roluser">Admin</span>
+                </div>
+                <img src="{{ url_for('static', filename='images/test_account_100px.png')}}"  class="profile" alt="">
+                <a href="/logout" type="button" class="btn"><img src="{{ url_for('static', filename='images/off.png')}}" class="logout" alt="Cerrar sesion"></a>
             </div>
         </div>
         <div class="cuerpo">
