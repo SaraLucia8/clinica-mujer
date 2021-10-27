@@ -44,8 +44,8 @@
                                 <span class="nombre_user">{{ t.nombre }} {{ t.apellido }}</span>
                             </div>
                             <div class="contenedordbtn"> 
-                                <a href="/medico/historia-clinica/user"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
-                                <a href="/medico/historia-clinica/user/newcoment"><img src="{{ url_for('static', filename='images/plus_math_purple_100px.png')}}" class="btned" alt=""></a>
+                                <a href="/medico/historia-clinica/user/{{t.cedula}}"><img src="{{ url_for('static', filename='images/eye_100px.png')}}" class="btned" alt=""></a>
+                                <a href="/medico/historia-clinica/user/newcoment//{{t.cedula}}"><img src="{{ url_for('static', filename='images/plus_math_purple_100px.png')}}" class="btned" alt=""></a></div>
                             </div>
                         </div>
                         <!-- <span>{{ t.nombre }} {{ t.apellido }}</span> -->
