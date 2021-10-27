@@ -460,17 +460,30 @@ def historia_medico(cedulam):
     else:
         return render('acceso-denegado.html')
     
-@app.route('/medico/historia-clinica/user/newcoment', methods=['GET', 'POST'])
-def comentar_medico():
+@app.route('/medico/historia-clinica/user/newcoment/<cedulap>', methods=['GET', 'POST'])
+def comentar_medico(cedulap):
     if 'usuarioIngresado' in session:
-        return render('med-comentarcita.html')
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        citap= citas.query.filter_by(paciente_id=cedulap).first()
+
+        if request.method == 'POST':
+            citap.sintomas = request.form['sintomas']
+            citap.diagnostico =  request.form['diagnostico']
+            citap.anotaciones = request.form['anotaciones']
+            citap.estado = 1
+
+            db.session.commit()
+        return render('med-comentarcita.html', usuario=usuario, cita = citap)
     else:
         return render('acceso-denegado.html')
         
-@app.route('/medico/historia-clinica/user', methods=['GET'])
-def ver_medico():
+@app.route('/medico/historia-clinica/user/<cedulap>', methods=['GET'])
+def ver_medico(cedulap):
     if 'usuarioIngresado' in session:
-        return render('med-vercita.html')
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+        pax = users.query.filter_by(cedula= cedulap).first()
+        citap= citas.query.filter_by(paciente_id=cedulap).first()
+        return render('med-vercita.html', usuario =usuario, cita= citap, paciente= pax)
     else:
         return render('acceso-denegado.html')
 
@@ -494,7 +507,23 @@ def citas_paciente():
 @app.route('/mis-citas/agendar', methods=['GET', 'POST'])
 def newcitas_paciente():
     if 'usuarioIngresado' in session:
-        return render('pac-newcitas.html')
+    
+        medicos = users.query.filter_by(rol='medico')
+        usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
+    
+        if request.method == 'POST':
+            medico_id = request.form['medicos']
+            paciente_id = int(session['usuarioIngresado'])
+            fecha = request.form['fecha-cita']
+            hora_atencion = request.form['hora-cita']
+            motivo = request.form['motivo']
+            estado = 0
+
+            cita = citas(medico_id=medico_id, paciente_id=paciente_id, fecha= fecha, hora_atencion= hora_atencion, motivo=motivo, estado=estado)
+            db.session.add(cita)
+            db.session.commit()
+
+        return render('pac-newcitas.html', medicos = medicos, usuario = usuario)
     else:
         return render('acceso-denegado.html')
     
