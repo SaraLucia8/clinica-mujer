@@ -19,7 +19,6 @@ body {
 }
 
 .boton__registro{
-    display:block;
     height: 3rem;
     width: 100%;
     background: #F72B50;
@@ -55,6 +54,10 @@ body {
     text-align: center;
     border-radius: 20px;
     border: none;
+}
+
+.cedula{
+    width: 100%;text-align: center;
 }
 
 .cuerpo {
@@ -222,11 +225,14 @@ body {
 }
 
 .form-edicion div{
+    display: flex;
     width: 250px;
     font-family: 'Ropa Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: #F72B50;
-    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .textfield{
@@ -266,7 +272,14 @@ p {
 .searchuser {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.subtitulo {
+    font-size: 1rem;
+    font-family: 'Ropa Sans', sans-serif;
+    margin-bottom: 1rem;
 }
 
 .titulo {
