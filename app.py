@@ -590,8 +590,11 @@ def eliminar_cita_paciente():
 @app.route('/mi-historia-clinica', methods=['GET'])
 def historia_paciente():
     if 'usuarioIngresado' in session:
+        paciente = users.query.filter_by(cedula=int(session['usuarioIngresado']))
         usuario = users.query.filter_by(cedula=int(session['usuarioIngresado'])).first()
-        return render('pac-historia.html', row=usuario)
+        medicos = users.query.filter_by(rol='medico')
+        citass = citas.query.filter_by(paciente_id=int(session['usuarioIngresado'])).all()
+        return render('pac-historia.html', data=paciente, row=usuario, listamedicos=medicos,  cita=citass)
     else:
         return render('acceso-denegado.html')
     

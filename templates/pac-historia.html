@@ -31,11 +31,26 @@
         </div>
         <div class="cuerpo"> <!--En este espacio va la informacion especifica de cada pagina -->
             <h1 class="titulo"><span style="color:#F72B50">Mi historia clinica</span></h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p> <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p> <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p> <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p> <br>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum quidem, cupiditate error dolor voluptatibus nulla quod eum. Tenetur, voluptate perferendis ratione consequatur consequuntur reiciendis autem assumenda, ipsum ducimus natus incidunt? Eos magni cum esse voluptatum illo reiciendis. Minus, culpa totam.</p>
+            {% for c in cita %}
+                {% if c.estado == 1%}
+                    <div class="detallehistoria">
+                        <span style="color:#450B5A">Fecha </span><span>{{c.fecha}}</span> <br>
+                        <span style="color:#450B5A">Hora de atencion </span><span>{{c.hora_atencion}}</span> <br>
+                        <span style="color:#450B5A">Medico </span>
+                        <span>
+                            {% for l in listamedicos %}
+                            {% if c.medico_id == l.cedula %}
+                                <span>{{l.nombre}} {{l.apellido}}</span>
+                            {% endif %}
+                            {% endfor %}
+                        </span> <br>
+                        <span style="color:#450B5A">Motivo </span><span>{{c.motivo}}</span> <br>
+                        <span style="color:#450B5A">Sintomas </span><span>{{c.sintomas}}</span> <br>
+                        <span style="color:#450B5A">Diagnostico </span><span>{{c.diagnostico}}</span> <br>
+                        <span style="color:#450B5A">Anotaciones </span><span>{{c.anotaciones}}</span>
+                    </div> <br>
+                {% endif %}
+            {% endfor %}
         </div>
     </main> 
 </body>
